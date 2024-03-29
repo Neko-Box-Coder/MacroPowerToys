@@ -1,4 +1,4 @@
-# Macro Power Toy
+# Macro Power Toy 🎲
 
 A collection of useful macros for manipulating the arguments. 
 Useful codebase that needs a decent amount of preprocessing before compiling.
