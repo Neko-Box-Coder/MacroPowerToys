@@ -21,16 +21,16 @@ R"(
     ) (prefix, suffix, __VA_ARGS__)
 
 
-#define INTERNAL_MPT_PREPEND_APPEND_ARGS_0( pre, suf )
+#define INTERNAL_MPT_PREFIX_SUFFIX_ARGS_0( pre, suf )
 
-#define INTERNAL_MPT_PREPEND_APPEND_ARGS_1( pre, suf, _1 ) \
+#define INTERNAL_MPT_PREFIX_SUFFIX_ARGS_1( pre, suf, _1 ) \
 pre ## _1 ## suf
 
 )";
     
     for(int i = 2; i < 100; ++i)
     {
-        content += "#define INTERNAL_MPT_PREPEND_APPEND_ARGS_" + std::to_string(i) + "( pre, suf, ";
+        content += "#define INTERNAL_MPT_PREFIX_SUFFIX_ARGS_" + std::to_string(i) + "( pre, suf, ";
         
         for(int j = 1; j <= i; ++j)
         {
@@ -42,7 +42,7 @@ pre ## _1 ## suf
         
         content += " ) \\\n";
         
-        content +=  "INTERNAL_MPT_PREPEND_APPEND_ARGS_" + std::to_string(i - 1) + 
+        content +=  "INTERNAL_MPT_PREFIX_SUFFIX_ARGS_" + std::to_string(i - 1) + 
                     "(pre, suf, ";
 
         for(int j = 1; j < i; ++j)
