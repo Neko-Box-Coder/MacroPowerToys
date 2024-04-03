@@ -5,6 +5,7 @@
 #include "./ArgsCount.h"
 #include "./ConcatListsItems.h"
 #include "./CountTo.h"
+#include "./GetLastArg.h"
 #include "./IsEmptyArgs.h"
 #include "./Overload.h"
 #include "./PrefixSuffixArgs.h"

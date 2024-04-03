@@ -10,6 +10,7 @@ Just include `MacroPowerToy.h` to enjoy the macros.
 - [Appending / Concatenating items between two lists](#appending-concatenating-items-between-two-lists)
 - [Counting the number of arguments](#counting-the-number-of-arguments)
 - [Generate a list that counts up to the number](#generate-a-list-that-counts-up-to-the-number)
+- [Get the last argument](#get-the-last-argument)
 - [Check if arguments are empty or not](#check-if-arguments-are-empty-or-not)
 - [Wrapper Macros (Concatenating, Composing, Remove parentheses)](#wrapper-macros-concatenating-composing-remove-parentheses)
 - [Macro Function Overloading](#macro-function-overloading)
@@ -60,13 +61,28 @@ MPT_ARGS_COUNT( a1, a2, a3, a4 )
 ### Generate a list that counts up to the number
 
 - `MPT_COUNT_TO_<Number>(prefix, suffix)`
+- `MPT_COUNT_TO_<Number>_MINUS_1(prefix, suffix)`
 ```c
 //Create a list that counts up to 5
 MPT_COUNT_TO_5( prefix_, /* no suffix */ )
+MPT_COUNT_TO_3_MINUS_1( _, _ )
 
 //Expands to...
 
 prefix_1, prefix_2, prefix_3, prefix_4, prefix_5
+_1_, _2_
+```
+
+### Get the last argument
+
+- `MPT_GET_LAST_ARG( arguments )`
+```c
+//Get the last argument in the list
+MPT_GET_LAST_ARG( a1, a2, a3, a4 )
+
+//Expands to...
+
+a4
 ```
 
 ### Check if arguments are empty or not
