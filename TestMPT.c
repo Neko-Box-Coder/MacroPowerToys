@@ -107,12 +107,12 @@ void TEST__MPT_OVERLOAD_MACRO()
 
 void TEST__MPT_PREFIX_SUFFIX_ARGS()
 {
-    int MPT_PREFIX_SUFFIX_ARGS( a, b, 1, 2, 3);
+    int MPT_PREFIX_SUFFIX_ARGS( a, b, 1, 2, 3 );
     (void)a1b;
     (void)a2b;
     (void)a3b;
 
-    int MPT_PREFIX_SUFFIX_ARGS( a, /* */, 1, 2, 3);
+    int MPT_PREFIX_SUFFIX_ARGS( a, /* */, 1, 2, 3 );
     (void)a1;
     (void)a2;
     (void)a3;

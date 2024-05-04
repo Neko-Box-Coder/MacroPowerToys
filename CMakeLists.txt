@@ -16,8 +16,8 @@ add_library(MacroPowerToy INTERFACE)
 target_include_directories(MacroPowerToy INTERFACE "${CMAKE_CURRENT_LIST_DIR}")
 
 if(MACRO_POWER_TOY_BUILD_TEST)
-    if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-        set(STANDARD_COMPILE_FLAGS "/utf-8;/W1")
+    if (CMAKE_C_COMPILER_ID STREQUAL "MSVC")
+        set(STANDARD_COMPILE_FLAGS "/utf-8;/W1;/Zc:preprocessor")
     else()
         set(STANDARD_COMPILE_FLAGS  "-Wall"
                                     "-Wno-return-local-addr"
