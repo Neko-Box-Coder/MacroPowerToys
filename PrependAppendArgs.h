@@ -3,15 +3,41 @@
 
 #include "./Overload.h"
 #include "./ArgsCount.h"
+#include "./IsEmptyArgs.h"
+#include "./Miscellaneous.h"
 
+#ifndef INTERNAL_MPT_PREPEND_COMMA_EMPTY
+    #define INTERNAL_MPT_PREPEND_COMMA_EMPTY(...)
+#endif
+
+#ifndef INTERNAL_MPT_PREPEND_COMMA_NOT_EMPTY
+    #define INTERNAL_MPT_PREPEND_COMMA_NOT_EMPTY(...) , __VA_ARGS__
+#endif
 
 #define MPT_PREPEND_APPEND_ARGS( prepend, append, ... ) \
     INTERNAL_MPT_VA_ARGS_FIX \
     ( \
-        INTERNAL_MPT_SELECT, \
-        ( INTERNAL_MPT_PREPEND_APPEND_ARGS, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
-    ) (prepend, append, __VA_ARGS__)
-
+        INTERNAL_MPT_VA_ARGS_FIX \
+        ( \
+            INTERNAL_MPT_SELECT, \
+            ( INTERNAL_MPT_PREPEND_APPEND_ARGS, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
+        ), \
+        ( \
+            prepend, \
+            append \
+            INTERNAL_MPT_VA_ARGS_FIX \
+            ( \
+                INTERNAL_MPT_VA_ARGS_FIX \
+                ( \
+                    MPT_CONCAT, \
+                    ( \
+                        INTERNAL_MPT_PREPEND_COMMA_, MPT_IS_ARGS_EMPTY( __VA_ARGS__ ) \
+                    ) \
+                ), \
+                (__VA_ARGS__) \
+            ) \
+        ) \
+    )
 
 #define INTERNAL_MPT_PREPEND_APPEND_ARGS_0( pre, app )
 

@@ -5,6 +5,8 @@ Useful codebase that needs a decent amount of preprocessing before compiling.
 
 Just include `MacroPowerToy.h` to enjoy the macros.
 
+> If you are using C in MSVC, `/Zc:preprocessor` is needed as default MSVC preprocessor is not standard conformant
+
 ## Macros
 
 - [Appending / Concatenating items between two lists](#appending-concatenating-items-between-two-lists)
@@ -60,11 +62,11 @@ MPT_ARGS_COUNT( a1, a2, a3, a4 )
 
 ### Generate a list that counts up to the number
 
-- `MPT_COUNT_TO_<Number>(prefix, suffix)`
+- `MPT_COUNT_TO_<Number>_(prefix, suffix)`
 - `MPT_COUNT_TO_<Number>_MINUS_1(prefix, suffix)`
 ```c
 //Create a list that counts up to 5
-MPT_COUNT_TO_5( prefix_, /* no suffix */ )
+MPT_COUNT_TO_5_( prefix_, /* no suffix */ )
 MPT_COUNT_TO_3_MINUS_1( _, _ )
 
 //Expands to...
@@ -109,9 +111,6 @@ NOT_EMPTY
 - `MPT_REMOVE_PARENTHESIS( a, b )`
 
 ```c
-
-#define ITEM_1 item_1
-#define ITEM_2 item_2
 
 MPT_CONCAT( ITEM_1, ITEM_2 )
 MPT_COMPOSE( ITEM_1, ITEM_2 )
