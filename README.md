@@ -5,6 +5,8 @@ Useful codebase that needs a decent amount of preprocessing before compiling.
 
 Just include `MacroPowerToy.h` to enjoy the macros.
 
+> If you are using C in MSVC, `/Zc:preprocessor` is needed as default MSVC preprocessor is not standard conformant
+
 ## Macros
 
 - [Appending / Concatenating items between two lists](#appending-concatenating-items-between-two-lists)
