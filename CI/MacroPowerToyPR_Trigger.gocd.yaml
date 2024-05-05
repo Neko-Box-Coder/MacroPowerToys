@@ -9,79 +9,79 @@ pipelines:
             MacroPowerToy_PR:
                 scm: 9f61a13c-65e5-4461-81ab-63590343fbc5
         stages:
-        - BootstrapStage:
-            fetch_materials: false
-            keep_artifacts: false
-            clean_workspace: false
-            approval:
-                type: success
-                allow_only_on_success: true
-            jobs:
-                BootstrapJob:
-                    timeout: 0
-                    resources:
-                    -   Ubuntu-22
-                    tasks:
-                    -   exec:
-                            arguments:
-                            -   -lah
-                            command: ls
-        - PopulateDetailsStage:
-            fetch_materials: true
-            keep_artifacts: false
-            clean_workspace: true
-            approval:
-                type: manual
-                allow_only_on_success: true
-            jobs:
-                PopulateDetailsJob:
-                    timeout: 0
-                    resources:
-                    -   Ubuntu-22
-                    artifacts:
-                    -   build:
-                            source: "*"
-                            destination: MacroPowerToy
-                    tasks:
-                    -   exec:
-                            command: ls
-                    -   exec:
-                            arguments:
-                            -   -c
-                            -   git submodule update --init --recursive
-                            command: sh
-                    -   script: |-
-                            git clone https://github.com/Neko-Box-Coder/GoCD_CI_Scripts.git
-                            mv ./GoCD_CI_Scripts/*.sh ./
-                            mv ./GoCD_CI_Scripts/*.bat ./
-                    -   exec:
-                            arguments:
-                            -   -c
-                            -   echo $GO_SCM_MACROPOWERTOY_PR_PR_BRANCH > ./.github_pr_branch
-                            command: sh
-                    -   exec:
-                            arguments:
-                            -   -c
-                            -   echo $GO_SCM_MACROPOWERTOY_PR_TARGET_BRANCH > ./.github_target_branch
-                            command: sh
-                    -   exec:
-                            arguments:
-                            -   -c
-                            -   echo $(git rev-parse --verify HEAD) > ./.githash
-                            command: sh
-                    -   exec:
-                            arguments:
-                            -   -c
-                            -   echo $(date +"%Y%m%d%H%M%S") > .pipeline_start_time
-                            command: sh
-                    -   script: |-
-                            IFS=":" read SPLIT_1 SPLIT_2 SPLIT_EXCESS <<< $(cat ./.github_pr_branch)
-                            echo neko-box-coder > ./.repo_owner
-                            echo MacroPowerToy > ./.repo_name
-                    -   exec:
-                            arguments:
-                            -   -lah
-                            command: ls
+        -   BootstrapStage:
+                fetch_materials: false
+                keep_artifacts: false
+                clean_workspace: false
+                approval:
+                    type: success
+                    allow_only_on_success: true
+                jobs:
+                    BootstrapJob:
+                        timeout: 0
+                        resources:
+                        -   Ubuntu-22
+                        tasks:
+                        -   exec:
+                                arguments:
+                                -   -lah
+                                command: ls
+        -   PopulateDetailsStage:
+                fetch_materials: true
+                keep_artifacts: false
+                clean_workspace: true
+                approval:
+                    type: manual
+                    allow_only_on_success: true
+                jobs:
+                    PopulateDetailsJob:
+                        timeout: 0
+                        resources:
+                        -   Ubuntu-22
+                        artifacts:
+                        -   build:
+                                source: "*"
+                                destination: MacroPowerToy
+                        tasks:
+                        -   exec:
+                                command: ls
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   git submodule update --init --recursive
+                                command: sh
+                        -   script: |-
+                                git clone https://github.com/Neko-Box-Coder/GoCD_CI_Scripts.git
+                                mv ./GoCD_CI_Scripts/*.sh ./
+                                mv ./GoCD_CI_Scripts/*.bat ./
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   echo $GO_SCM_MACROPOWERTOY_PR_PR_BRANCH > ./.github_pr_branch
+                                command: sh
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   echo $GO_SCM_MACROPOWERTOY_PR_TARGET_BRANCH > ./.github_target_branch
+                                command: sh
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   echo $(git rev-parse --verify HEAD) > ./.githash
+                                command: sh
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   echo $(date +"%Y%m%d%H%M%S") > .pipeline_start_time
+                                command: sh
+                        -   script: |-
+                                IFS=":" read SPLIT_1 SPLIT_2 SPLIT_EXCESS <<< $(cat ./.github_pr_branch)
+                                echo $SPLIT_1 > ./.repo_owner
+                                echo MacroPowerToy > ./.repo_name
+                        -   exec:
+                                arguments:
+                                -   -lah
+                                command: ls
         -   TriggerStage:
                 fetch_materials: false
                 keep_artifacts: false

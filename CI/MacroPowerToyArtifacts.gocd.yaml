@@ -52,12 +52,14 @@ pipelines:
                                 stage: PopulateDetailsStage
                                 job: PopulateDetailsJob
                                 artifact_origin: gocd
+                                run_if: any
                         -   exec:
                                 arguments:
                                 -   -c
                                 -   ./ChooseLatestFolder.sh ./MacroPowerToyPR/MacroPowerToy
                                     ./MacroPowerToyMain/MacroPowerToy ./MacroPowerToy
                                 command: sh
+                                run_if: any
                         -   exec:
                                 arguments:
                                 -   -lah

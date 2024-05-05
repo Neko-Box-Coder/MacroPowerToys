@@ -6,10 +6,10 @@ pipelines:
         lock_behavior: none
         display_order: -1
         materials:
-            mpt-git:
+            MacroPowerToyGit:
                 git: https://github.com/Neko-Box-Coder/MacroPowerToys.git
                 shallow_clone: false
-                auto_update: true
+                auto_update: false
                 branch: master
         stages:
         -   PopulateDetailsStage:
@@ -58,44 +58,44 @@ pipelines:
                                 -   -lah
                                 command: ls
         -   TriggerStage:
-                  fetch_materials: false
-                  keep_artifacts: false
-                  clean_workspace: true
-                  approval:
-                      type: success
-                      allow_only_on_success: true
-                  jobs:
-                      TriggerJob:
-                          timeout: 0
-                          environment_variables:
-                              CI_GITHUB_PAT: "{{SECRET:[SECRET_CONFIG][CI_GITHUB_PAT]}}"
-                          resources:
-                            -   Ubuntu-22
-                          tasks:
-                            -   fetch:
-                                    is_file: false
-                                    source: MacroPowerToy
-                                    destination: ""
-                                    pipeline: MacroPowerToyMainTrigger
-                                    stage: PopulateDetailsStage
-                                    job: PopulateDetailsJob
-                                    artifact_origin: gocd
-                            -   exec:
-                                    arguments:
-                                    -   -lah
-                                    command: ls
-                                    working_directory: MacroPowerToy
-                            -   exec:
-                                    arguments:
-                                    -   +x
-                                    -   ./SendGithubStatus.sh
-                                    command: chmod
-                                    working_directory: MacroPowerToy
-                            -   exec:
-                                    arguments:
-                                    -   -c
-                                    -   ./SendGithubStatus.sh "$CI_GITHUB_PAT" "success"
-                                        "$GO_PIPELINE_NAME" "$GO_PIPELINE_COUNTER" "$GO_STAGE_NAME"
-                                        "$GO_STAGE_COUNTER" "$GO_JOB_NAME"
-                                    command: sh
-                                    working_directory: MacroPowerToy
+                fetch_materials: false
+                keep_artifacts: false
+                clean_workspace: true
+                approval:
+                    type: success
+                    allow_only_on_success: true
+                jobs:
+                    TriggerJob:
+                        timeout: 0
+                        environment_variables:
+                            CI_GITHUB_PAT: "{{SECRET:[SECRET_CONFIG][CI_GITHUB_PAT]}}"
+                        resources:
+                        -   Ubuntu-22
+                        tasks:
+                        -   fetch:
+                                is_file: false
+                                source: MacroPowerToy
+                                destination: ""
+                                pipeline: MacroPowerToyMainTrigger
+                                stage: PopulateDetailsStage
+                                job: PopulateDetailsJob
+                                artifact_origin: gocd
+                        -   exec:
+                                arguments:
+                                -   -lah
+                                command: ls
+                                working_directory: MacroPowerToy
+                        -   exec:
+                                arguments:
+                                -   +x
+                                -   ./SendGithubStatus.sh
+                                command: chmod
+                                working_directory: MacroPowerToy
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   ./SendGithubStatus.sh "$CI_GITHUB_PAT" "success"
+                                    "$GO_PIPELINE_NAME" "$GO_PIPELINE_COUNTER" "$GO_STAGE_NAME"
+                                    "$GO_STAGE_COUNTER" "$GO_JOB_NAME"
+                                command: sh
+                                working_directory: MacroPowerToy
