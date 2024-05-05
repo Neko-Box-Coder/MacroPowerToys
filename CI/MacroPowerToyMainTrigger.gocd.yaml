@@ -94,7 +94,8 @@ pipelines:
                             -   exec:
                                     arguments:
                                     -   -c
-                                    -   ./SendGithubStatus.sh "$CI_GITHUB_PAT" "success" "$GO_PIPELINE_NAME"
-                                        "$GO_PIPELINE_COUNTER" "$GO_STAGE_NAME" "$GO_STAGE_COUNTER" "$GO_JOB_NAME"
+                                    -   ./SendGithubStatus.sh "$CI_GITHUB_PAT" "success"
+                                        "$GO_PIPELINE_NAME" "$GO_PIPELINE_COUNTER" "$GO_STAGE_NAME"
+                                        "$GO_STAGE_COUNTER" "$GO_JOB_NAME"
                                     command: sh
                                     working_directory: MacroPowerToy

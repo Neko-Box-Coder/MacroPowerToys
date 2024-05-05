@@ -1,0 +1,323 @@
+format_version: 10
+pipelines:
+    MacroPowerToyMain:
+        group: MacroPowerToy
+        label_template: ${COUNT}
+        lock_behavior: none
+        display_order: -1
+        environment_variables:
+            CI_GITHUB_PAT: "{{SECRET:[SECRET_CONFIG][CI_GITHUB_PAT]}}"
+        materials:
+            MacroPowerToyArtifacts:
+                ignore_for_scheduling: false
+                pipeline: MacroPowerToyArtifacts
+                stage: CommonArtifactsStage
+        stages:
+        -   BuildStage:
+                fetch_materials: false
+                keep_artifacts: false
+                clean_workspace: true
+                approval:
+                    type: success
+                    allow_only_on_success: false
+                jobs:
+                    LinuxBuildJob:
+                        timeout: 0
+                        resources:
+                        -   Ubuntu-22
+                        artifacts:
+                        -   build:
+                                source: MacroPowerToy/*
+                                destination: MacroPowerToyLinuxBuild
+                        tasks:
+                        -   fetch:
+                                is_file: false
+                                source: MacroPowerToy
+                                destination: ""
+                                pipeline: MacroPowerToyArtifacts
+                                stage: CommonArtifactsStage
+                                job: CommonArtifactsJob
+                                artifact_origin: gocd
+                        -   exec:
+                                arguments:
+                                -   -lah
+                                command: ls
+                        -   exec:
+                                arguments:
+                                -   -lah
+                                command: ls
+                                working_directory: MacroPowerToy
+                        -   exec:
+                                arguments:
+                                -   +x
+                                -   ./SendGithubStatus.sh
+                                command: chmod
+                                working_directory: MacroPowerToy
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   ./SendGithubStatus.sh "$CI_GITHUB_PAT" "pending"
+                                    "$GO_PIPELINE_NAME" "$GO_PIPELINE_COUNTER" "$GO_STAGE_NAME"
+                                    "$GO_STAGE_COUNTER" "$GO_JOB_NAME"
+                                command: sh
+                                working_directory: MacroPowerToy
+                        -   exec:
+                                arguments:
+                                -   -p
+                                -   ./Build
+                                command: mkdir
+                                working_directory: MacroPowerToy
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   cmake .. -DMACRO_POWER_TOY_BUILD_TEST=ON
+                                command: sh
+                                working_directory: MacroPowerToy/Build
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   cmake --build . -j 16
+                                command: sh
+                                working_directory: MacroPowerToy/Build
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   ./SendGithubStatus.sh "$CI_GITHUB_PAT" "success" 
+                                    "$GO_PIPELINE_NAME" "$GO_PIPELINE_COUNTER" "$GO_STAGE_NAME"
+                                    "$GO_STAGE_COUNTER" "$GO_JOB_NAME"
+                                command: sh
+                                working_directory: MacroPowerToy
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   ./SendGithubStatus.sh "$CI_GITHUB_PAT" "failure"
+                                    "$GO_PIPELINE_NAME" "$GO_PIPELINE_COUNTER" "$GO_STAGE_NAME"
+                                    "$GO_STAGE_COUNTER" "$GO_JOB_NAME"
+                                command: sh
+                                working_directory: MacroPowerToy
+                                run_if: failed
+                    WindowsBuildJob:
+                        timeout: 0
+                        resources:
+                        -   Windows-10
+                        artifacts:
+                        -   build:
+                                source: MacroPowerToy/*
+                                destination: MacroPowerToyWindowsBuild
+                        tasks:
+                        -   fetch:
+                                is_file: false
+                                source: MacroPowerToy
+                                destination: ""
+                                pipeline: MacroPowerToyArtifacts
+                                stage: CommonArtifactsStage
+                                job: CommonArtifactsJob
+                                artifact_origin: gocd
+                        -   exec:
+                                command: dir
+                                working_directory: MacroPowerToy
+                        -   exec:
+                                arguments:
+                                -   /s
+                                -   /v
+                                -   /c
+                                -   .\SendGithubStatus.bat "%CI_GITHUB_PAT%" "pending"
+                                    "%GO_PIPELINE_NAME%" "%GO_PIPELINE_COUNTER%" "%GO_STAGE_NAME%"
+                                    "%GO_STAGE_COUNTER%" "%GO_JOB_NAME%"
+                                command: cmd
+                                working_directory: MacroPowerToy
+                        -   exec:
+                                arguments:
+                                -   Build
+                                command: mkdir
+                                working_directory: MacroPowerToy
+                        -   exec:
+                                arguments:
+                                -   /s
+                                -   /v
+                                -   /c
+                                -   cmake .. -DMACRO_POWER_TOY_BUILD_TEST=ON
+                                command: cmd
+                                working_directory: MacroPowerToy\Build
+                        -   exec:
+                                arguments:
+                                -   /s
+                                -   /v
+                                -   /c
+                                -   cmake --build . -j 16
+                                command: cmd
+                                working_directory: MacroPowerToy\Build
+                        -   exec:
+                                command: dir
+                                working_directory: MacroPowerToy\Build
+                        -   exec:
+                                arguments:
+                                -   /s
+                                -   /v
+                                -   /c
+                                -   .\SendGithubStatus.bat "%CI_GITHUB_PAT%" "success"
+                                    "%GO_PIPELINE_NAME%" "%GO_PIPELINE_COUNTER%" "%GO_STAGE_NAME%"
+                                    "%GO_STAGE_COUNTER%" "%GO_JOB_NAME%"
+                                command: cmd
+                                working_directory: MacroPowerToy
+                        -   exec:
+                                arguments:
+                                -   /s
+                                -   /v
+                                -   /c
+                                -   .\SendGithubStatus "%CI_GITHUB_PAT%" "failure" "%GO_PIPELINE_NAME%"
+                                        "%GO_PIPELINE_COUNTER%" "%GO_STAGE_NAME%" "%GO_STAGE_COUNTER%" "%GO_JOB_NAME%"
+                                command: cmd
+                                working_directory: MacroPowerToy
+                                run_if: failed
+        -   TestStage:
+                fetch_materials: false
+                keep_artifacts: false
+                clean_workspace: true
+                approval:
+                    type: success
+                    allow_only_on_success: true
+                jobs:
+                    LinuxTestJob:
+                        timeout: 0
+                        resources:
+                        -   Ubuntu-22
+                        tasks:
+                        -   fetch:
+                                is_file: false
+                                source: MacroPowerToyLinuxBuild
+                                destination: ""
+                                pipeline: MacroPowerToyMain
+                                stage: BuildStage
+                                job: LinuxBuildJob
+                                artifact_origin: gocd
+                        -   exec:
+                                arguments:
+                                -   +x
+                                -   ./SendGithubStatus.sh
+                                command: chmod
+                                working_directory: MacroPowerToyLinuxBuild
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   ./SendGithubStatus.sh "$CI_GITHUB_PAT" "pending"
+                                    "$GO_PIPELINE_NAME" "$GO_PIPELINE_COUNTER" "$GO_STAGE_NAME"
+                                    "$GO_STAGE_COUNTER" "$GO_JOB_NAME"
+                                command: sh
+                                working_directory: MacroPowerToyLinuxBuild
+                        -   exec:
+                                arguments:
+                                -   +x
+                                -   ./TestMPT
+                                command: chmod
+                                working_directory: MacroPowerToyLinuxBuild/Build
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   ./TestMPT
+                                command: sh
+                                working_directory: MacroPowerToyLinuxBuild/Build
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   ./SendGithubStatus.sh "$CI_GITHUB_PAT" "success"
+                                    "$GO_PIPELINE_NAME" "$GO_PIPELINE_COUNTER" "$GO_STAGE_NAME"
+                                    "$GO_STAGE_COUNTER" "$GO_JOB_NAME"
+                                command: sh
+                                working_directory: MacroPowerToyLinuxBuild
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   ./SendGithubStatus.sh "$CI_GITHUB_PAT" "failure"
+                                    "$GO_PIPELINE_NAME" "$GO_PIPELINE_COUNTER" "$GO_STAGE_NAME"
+                                    "$GO_STAGE_COUNTER" "$GO_JOB_NAME"
+                                command: sh
+                                working_directory: MacroPowerToyLinuxBuild
+                                run_if: failed
+                    WindowsTestJob:
+                        timeout: 0
+                        resources:
+                        -   Windows-10
+                        tasks:
+                        -   fetch:
+                                is_file: false
+                                source: MacroPowerToyWindowsBuild
+                                destination: ""
+                                pipeline: MacroPowerToyMain
+                                stage: BuildStage
+                                job: WindowsBuildJob
+                                artifact_origin: gocd
+                        -   exec:
+                                arguments:
+                                -   /s
+                                -   /v
+                                -   /c
+                                -   .\SendGithubStatus.bat "%CI_GITHUB_PAT%" "pending"
+                                    "%GO_PIPELINE_NAME%" "%GO_PIPELINE_COUNTER%" "%GO_STAGE_NAME%"
+                                    "%GO_STAGE_COUNTER%" "%GO_JOB_NAME%"
+                                command: cmd
+                                working_directory: MacroPowerToyWindowsBuild
+                        -   exec:
+                                arguments:
+                                -   /s
+                                -   /v
+                                -   /c
+                                -   .\TestMPT.exe
+                                command: cmd
+                                working_directory: MacroPowerToyWindowsBuild\Build\Debug
+                        -   exec:
+                                arguments:
+                                -   /s
+                                -   /v
+                                -   /c
+                                -   .\SendGithubStatus.bat "%CI_GITHUB_PAT%" "success"
+                                    "%GO_PIPELINE_NAME%" "%GO_PIPELINE_COUNTER%" "%GO_STAGE_NAME%"
+                                    "%GO_STAGE_COUNTER%" "%GO_JOB_NAME%"
+                                command: cmd
+                                working_directory: MacroPowerToyWindowsBuild
+                        -   exec:
+                                arguments:
+                                -   /s
+                                -   /v
+                                -   /c
+                                -   .\SendGithubStatus "%CI_GITHUB_PAT%" "failure"
+                                    "%GO_PIPELINE_NAME%" "%GO_PIPELINE_COUNTER%" "%GO_STAGE_NAME%"
+                                    "%GO_STAGE_COUNTER%" "%GO_JOB_NAME%"
+                                command: cmd
+                                working_directory: MacroPowerToyWindowsBuild
+                                run_if: failed
+        -   FinishStage:
+                fetch_materials: false
+                keep_artifacts: false
+                clean_workspace: true
+                approval:
+                    type: success
+                    allow_only_on_success: true
+                jobs:
+                    FinishJob:
+                        timeout: 0
+                        resources:
+                        -   Ubuntu-22
+                        tasks:
+                        -   fetch:
+                                is_file: false
+                                source: MacroPowerToy
+                                destination: ""
+                                pipeline: MacroPowerToyArtifacts
+                                stage: CommonArtifactsStage
+                                job: CommonArtifactsJob
+                                artifact_origin: gocd
+                        -   exec:
+                                arguments:
+                                -   +x
+                                -   ./SendGithubStatus.sh
+                                command: chmod
+                                working_directory: MacroPowerToy
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   ./SendGithubStatus.sh "$CI_GITHUB_PAT" "success"
+                                    "$GO_PIPELINE_NAME" "$GO_PIPELINE_COUNTER" "$GO_STAGE_NAME"
+                                    "$GO_STAGE_COUNTER" "$GO_JOB_NAME"
+                                command: sh
+                                working_directory: MacroPowerToy

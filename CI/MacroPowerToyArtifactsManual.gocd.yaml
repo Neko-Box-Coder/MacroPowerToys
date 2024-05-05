@@ -1,0 +1,69 @@
+format_version: 10
+pipelines:
+    MacroPowerToyArtifacts:
+        group: MacroPowerToy
+        label_template: ${COUNT}
+        lock_behavior: none
+        display_order: -1
+        materials:
+            MacroPowerToyMainTrigger:
+                ignore_for_scheduling: false
+                pipeline: MacroPowerToyMainTrigger
+                stage: TriggerStage
+            MacroPowerToyPR_Trigger:
+                ignore_for_scheduling: false
+                pipeline: MacroPowerToyPR_Trigger
+                stage: TriggerStage
+        stages:
+        -   CommonArtifactsStage:
+                fetch_materials: false
+                keep_artifacts: false
+                clean_workspace: true
+                approval:
+                    type: success
+                    allow_only_on_success: true
+                jobs:
+                    CommonArtifactsJob:
+                        timeout: 0
+                        resources:
+                        -   Ubuntu-22
+                        artifacts:
+                        -   build:
+                                source: MacroPowerToy/*
+                                destination: MacroPowerToy
+                        tasks:
+                        -   script: |-
+                                git clone https://github.com/Neko-Box-Coder/GoCD_CI_Scripts.git
+                                mv ./GoCD_CI_Scripts/*.sh ./
+                                mv ./GoCD_CI_Scripts/*.bat ./
+                        -   fetch:
+                                is_file: false
+                                source: MacroPowerToy
+                                destination: MacroPowerToyPR
+                                pipeline: MacroPowerToyPR_Trigger
+                                stage: PopulateDetailsStage
+                                job: PopulateDetailsJob
+                                artifact_origin: gocd
+                        -   fetch:
+                                is_file: false
+                                source: MacroPowerToy
+                                destination: MacroPowerToyMain
+                                pipeline: MacroPowerToyMainTrigger
+                                stage: PopulateDetailsStage
+                                job: PopulateDetailsJob
+                                artifact_origin: gocd
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   ./ChooseLatestFolder.sh ./MacroPowerToyPR/MacroPowerToy
+                                    ./MacroPowerToyMain/MacroPowerToy ./MacroPowerToy
+                                command: sh
+                        -   exec:
+                                arguments:
+                                -   -lah
+                                command: ls
+                        -   exec:
+                                arguments:
+                                -   -lah
+                                command: ls
+                                working_directory: MacroPowerToy
