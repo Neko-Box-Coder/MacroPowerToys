@@ -219,6 +219,18 @@ pipelines:
                                 working_directory: MacroPowerToyLinuxBuild/Build
                         -   exec:
                                 arguments:
+                                -   +x
+                                -   ./TestMPT_Cpp
+                                command: chmod
+                                working_directory: MacroPowerToyLinuxBuild/Build
+                        -   exec:
+                                arguments:
+                                -   -c
+                                -   ./TestMPT_Cpp
+                                command: sh
+                                working_directory: MacroPowerToyLinuxBuild/Build
+                        -   exec:
+                                arguments:
                                 -   -c
                                 -   ./SendGithubStatus.sh "$CI_GITHUB_PAT" "success"
                                     "$GO_PIPELINE_NAME" "$GO_PIPELINE_COUNTER" "$GO_STAGE_NAME"
@@ -263,6 +275,14 @@ pipelines:
                                 -   /v
                                 -   /c
                                 -   .\TestMPT.exe
+                                command: cmd
+                                working_directory: MacroPowerToyWindowsBuild\Build\Debug
+                        -   exec:
+                                arguments:
+                                -   /s
+                                -   /v
+                                -   /c
+                                -   .\TestMPT_Cpp.exe
                                 command: cmd
                                 working_directory: MacroPowerToyWindowsBuild\Build\Debug
                         -   exec:

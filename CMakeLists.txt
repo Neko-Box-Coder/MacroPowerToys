@@ -35,6 +35,8 @@ if(MACRO_POWER_TOY_BUILD_TEST)
     target_link_libraries(TestMPT INTERFACE MacroPowerToy)
     target_compile_options(TestMPT PUBLIC "${STANDARD_COMPILE_FLAGS}")
     
-    
+    add_executable(TestMPT_Cpp "${CMAKE_CURRENT_LIST_DIR}/TestMPT.cpp")
+    target_link_libraries(TestMPT_Cpp INTERFACE MacroPowerToy)
+    target_compile_options(TestMPT_Cpp PUBLIC "${STANDARD_COMPILE_FLAGS}")
 endif()
 
