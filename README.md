@@ -1,11 +1,9 @@
-# Macro Power Toy 🎲
+# Macro Power Toys 🎲
 
 A collection of useful macros for manipulating the arguments. 
 Useful codebase that needs a decent amount of preprocessing before compiling.
 
-Just include `MacroPowerToy.h` to enjoy the macros.
-
-> If you are using C in MSVC, `/Zc:preprocessor` is needed as default MSVC preprocessor is not standard conformant
+Just include `MacroPowerToys.h` to enjoy the macros.
 
 ## Macros
 
@@ -89,15 +87,15 @@ a4
 
 ### Check if arguments are empty or not
 
-- `MPT_IS_ARGS_EMPTY( arguments )`
+- `MPT_ARE_ARGS_EMPTY( arguments )`
 ```c
 
 //Check if the list is empty
 #define EMPTY_LIST
 #define NOT_EMPTY_LIST 1, 2, 3
 
-MPT_IS_ARGS_EMPTY(EMPTY_LIST)
-MPT_IS_ARGS_EMPTY(NOT_EMPTY_LIST)
+MPT_ARE_ARGS_EMPTY(EMPTY_LIST)
+MPT_ARE_ARGS_EMPTY(NOT_EMPTY_LIST)
 
 //Expands to...
 
@@ -107,7 +105,13 @@ NOT_EMPTY
 
 ### Wrapper Macros (Concatenating, Composing, Remove parentheses)
 - `MPT_CONCAT( a, b )`
+    - This has 10 copies for nested calling
+    > `MPT_CONCAT2( a, b )`, `MPT_CONCAT3( a, b )`, etc...
+    - This also has a delayed version for ability to not expand immediately
+    > `MPT_DELAYED_CONCAT( a, b )`, `MPT_DELAYED_CONCAT2( a, b )`, etc...
 - `MPT_COMPOSE( a, b )`
+    - This has 10 copies for nested calling
+    > `MPT_COMPOSE2( a, b )`, `MPT_COMPOSE3( a, b )`, etc...
 - `MPT_REMOVE_PARENTHESIS( a, b )`
 
 ```c

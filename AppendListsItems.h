@@ -2,15 +2,20 @@
 #define MPT_APPEND_LISTS_ITEMS_H
 
 #include "./Overload.h"
+#include "./Miscellaneous.h"
 #include "./ArgsCount.h"
 
 
 #define MPT_APPEND_LISTS_ITEMS( ... ) \
-    INTERNAL_MPT_VA_ARGS_FIX \
+    INTERNAL_MPT_DELAYED_COMPOSE3 \
     ( \
-        INTERNAL_MPT_SELECT, \
-        ( INTERNAL_MPT_APPEND_LISTS_ITEMS, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
-    ) (__VA_ARGS__)
+        INTERNAL_MPT_COMPOSE2 \
+        ( \
+            INTERNAL_MPT_SELECT, \
+            ( INTERNAL_MPT_APPEND_LISTS_ITEMS, INTERNAL_MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
+        ), \
+        (__VA_ARGS__) \
+    )
 
 
 #define INTERNAL_MPT_APPEND_LISTS_ITEMS_0()

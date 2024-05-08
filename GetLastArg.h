@@ -3,10 +3,10 @@
 
 #include "./Overload.h"
 #include "./ArgsCount.h"
-
+#include "./Miscellaneous.h"
 
 #define MPT_GET_LAST_ARG( ... ) \
-    INTERNAL_MPT_VA_ARGS_FIX \
+    INTERNAL_MPT_COMPOSE2 \
     ( \
         INTERNAL_MPT_SELECT, \
         ( INTERNAL_MPT_GET_LAST_ARG, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \

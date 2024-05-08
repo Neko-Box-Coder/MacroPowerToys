@@ -2,11 +2,12 @@
 #define MPT_CONCAT_LISTS_ITEMS_H
 
 #include "./Overload.h"
+#include "./Miscellaneous.h"
 #include "./ArgsCount.h"
 
 
 #define MPT_CONCAT_LISTS_ITEMS( ... ) \
-    INTERNAL_MPT_VA_ARGS_FIX \
+    INTERNAL_MPT_COMPOSE2 \
     ( \
         INTERNAL_MPT_SELECT, \
         ( INTERNAL_MPT_CONCAT_LISTS_ITEMS, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \

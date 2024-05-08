@@ -3,9 +3,6 @@
 
 #include "./Miscellaneous.h"
 
-//https://stackoverflow.com/questions/16683146/can-macros-be-overloaded-by-number-of-arguments
-#define INTERNAL_MPT_SELECT( NAME, NUM ) MPT_CONCAT( NAME ## _, NUM )
-
 #define INTERNAL_MPT_GET_COUNT( _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, \
                                 _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, \
                                 _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, \
@@ -30,7 +27,7 @@
                                 ,,,,,,,,,
 
 #define MPT_ARGS_COUNT( ... ) \
-    MPT_COMPOSE \
+    INTERNAL_MPT_COMPOSE \
     ( \
         INTERNAL_MPT_GET_COUNT, \
         ( \
@@ -49,8 +46,7 @@
     )
 
 
-//MSVC workaround: https://stackoverflow.com/questions/48710758/how-to-fix-variadic-macro-related-issues-with-macro-overloading-in-msvc-mic
-//This is honestly retarded.
-#define INTERNAL_MPT_VA_ARGS_FIX( macro, args ) macro args
+#define INTERNAL_MPT_ARGS_COUNT( ... ) \
+    MPT_ARGS_COUNT( __VA_ARGS__ )
 
 #endif
