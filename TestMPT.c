@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "MacroPowerToy.h"
+#include "MacroPowerToys.h"
 
 #define TYPES_LIST int, char, void*
 #define NAMES a, b, c
@@ -15,12 +15,12 @@ void TEST__MPT_APPEND_LISTS_ITEMS(MPT_APPEND_LISTS_ITEMS( TYPES_LIST, NAMES ))
     (void)c;
 }
 
-void TEST__MPT_APPEND_LISTS_ITEMS__EMPTY(MPT_APPEND_LISTS_ITEMS(  ))
+void TEST__MPT_APPEND_LISTS_ITEMS__EMPTY(MPT_APPEND_LISTS_ITEMS(  ) void)
 {
 }
 
 
-void TEST__MPT_CONCAT_LISTS_ITEMS()
+void TEST__MPT_CONCAT_LISTS_ITEMS(void)
 {
     int MPT_CONCAT_LISTS_ITEMS(a, b, 1, 2);
     
@@ -34,15 +34,17 @@ void TEST__MPT_CONCAT_LISTS_ITEMS()
 
 int TEST__MPT_ARGS_COUNT(int a1, int b2)
 {
+    (void)a1;
+    (void)b2;
     return MPT_ARGS_COUNT(a1, b2);
 }
 
-int TEST__MPT_ARGS_COUNT__EMPTY()
+int TEST__MPT_ARGS_COUNT__EMPTY(void)
 {
     return MPT_ARGS_COUNT();
 }
 
-void TEST__MPT_COUNT_TO()
+void TEST__MPT_COUNT_TO(void)
 {
     int MPT_COUNT_TO_3_(a, b);
     (void)a1b;
@@ -53,7 +55,7 @@ void TEST__MPT_COUNT_TO()
     (void)c;
 }
 
-void TEST__MPT_COUNT_TO_MINUS_1()
+void TEST__MPT_COUNT_TO_MINUS_1(void)
 {
     int MPT_COUNT_TO_4_MINUS_1(a, b);
     (void)a1b;
@@ -71,15 +73,16 @@ void TEST__MPT_GET_LAST_ARG(int a, int b, int c)
 }
 
 #define STR(x) #x
+#define DELAYED_STR(x) MPT_COMPOSE(STR, (x))
 
-void TEST__MPT_IS_ARGS_EMPTY()
+void TEST__MPT_ARE_ARGS_EMPTY(void)
 {
-    assert( strcmp(MPT_COMPOSE(STR, (MPT_IS_ARGS_EMPTY())), "EMPTY") == 0 );
-    assert( strcmp(MPT_COMPOSE(STR, (MPT_IS_ARGS_EMPTY(1))), "NOT_EMPTY") == 0 );
-    assert( strcmp(MPT_COMPOSE(STR, (MPT_IS_ARGS_EMPTY(1, 2))), "NOT_EMPTY") == 0 );
+    assert( strcmp( DELAYED_STR( MPT_ARE_ARGS_EMPTY() ), "EMPTY") == 0 );
+    assert( strcmp( DELAYED_STR( MPT_ARE_ARGS_EMPTY(1) ), "NOT_EMPTY") == 0 );
+    assert( strcmp( DELAYED_STR( MPT_ARE_ARGS_EMPTY(1, 2) ), "NOT_EMPTY") == 0 );
 }
 
-void TEST__UTILS()
+void TEST__UTILS(void)
 {
     int MPT_CONCAT( ITEM_1, ITEM_2 );
     (void)ITEM_1ITEM_2;
@@ -92,7 +95,7 @@ void TEST__UTILS()
     (void)ITEM_3;
 }
 
-void TEST__MPT_OVERLOAD_MACRO()
+void TEST__MPT_OVERLOAD_MACRO(void)
 {
     #define MACRO_FUNC_0() 0
     #define MACRO_FUNC_1( a ) a
@@ -105,7 +108,7 @@ void TEST__MPT_OVERLOAD_MACRO()
     assert( MACRO_FUNC(1, 2) == 3 );
 }
 
-void TEST__MPT_PREFIX_SUFFIX_ARGS()
+void TEST__MPT_PREFIX_SUFFIX_ARGS(void)
 {
     int MPT_PREFIX_SUFFIX_ARGS( a, b, 1, 2, 3 );
     (void)a1b;
@@ -142,13 +145,16 @@ void TEST__MPT_PREPEND_APPEND_ARGS  (
     (void)a3;
 }
 
-void TEST__MPT_PREPEND_APPEND_ARGS__EMPTY(MPT_PREPEND_APPEND_ARGS(a, b, ))
+void TEST__MPT_PREPEND_APPEND_ARGS__EMPTY(MPT_PREPEND_APPEND_ARGS(a, b, ) void)
 {
     
 }
 
 int main(int argc, char** argv)
 {
+    (void)argc;
+    (void)argv;
+    
     TEST__MPT_APPEND_LISTS_ITEMS(1, 'a', NULL);
     TEST__MPT_CONCAT_LISTS_ITEMS();
     assert( TEST__MPT_ARGS_COUNT(1, 2) == 2 );
@@ -156,7 +162,7 @@ int main(int argc, char** argv)
     TEST__MPT_COUNT_TO();
     TEST__MPT_COUNT_TO_MINUS_1();
     TEST__MPT_GET_LAST_ARG(1, 2, 3);
-    TEST__MPT_IS_ARGS_EMPTY();
+    TEST__MPT_ARE_ARGS_EMPTY();
     TEST__UTILS();
     TEST__MPT_OVERLOAD_MACRO();
     TEST__MPT_PREFIX_SUFFIX_ARGS();

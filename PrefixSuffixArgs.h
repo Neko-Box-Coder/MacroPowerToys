@@ -3,7 +3,7 @@
 
 #include "./Overload.h"
 #include "./ArgsCount.h"
-#include "./IsEmptyArgs.h"
+#include "./AreArgsEmpty.h"
 #include "./Miscellaneous.h"
 
 #ifndef INTERNAL_MPT_PREPEND_COMMA_EMPTY
@@ -11,31 +11,31 @@
 #endif
 
 #ifndef INTERNAL_MPT_PREPEND_COMMA_NOT_EMPTY
-    #define INTERNAL_MPT_PREPEND_COMMA_NOT_EMPTY(...) , __VA_ARGS__
+    #define INTERNAL_MPT_PREPEND_COMMA_NOT_EMPTY(...) ,
 #endif
 
 #define MPT_PREFIX_SUFFIX_ARGS( prefix, suffix, ... ) \
-    INTERNAL_MPT_VA_ARGS_FIX \
+    INTERNAL_MPT_DELAYED_COMPOSE5 \
     ( \
-        INTERNAL_MPT_VA_ARGS_FIX \
+        INTERNAL_MPT_COMPOSE3 \
         ( \
-            INTERNAL_MPT_SELECT, \
-            ( INTERNAL_MPT_PREFIX_SUFFIX_ARGS, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
+            INTERNAL_MPT_COMPOSE2, \
+            ( \
+                INTERNAL_MPT_DELAYED_SELECT, \
+                ( INTERNAL_MPT_PREFIX_SUFFIX_ARGS, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
+            ) \
         ), \
         ( \
             prefix, \
             suffix \
-            INTERNAL_MPT_VA_ARGS_FIX \
+            INTERNAL_MPT_COMPOSE4 \
             ( \
-                INTERNAL_MPT_VA_ARGS_FIX \
+                MPT_DELAYED_CONCAT3 \
                 ( \
-                    MPT_CONCAT, \
-                    ( \
-                        INTERNAL_MPT_PREPEND_COMMA_, MPT_IS_ARGS_EMPTY( __VA_ARGS__ ) \
-                    ) \
+                    INTERNAL_MPT_PREPEND_COMMA_, MPT_ARE_ARGS_EMPTY( __VA_ARGS__ ) \
                 ), \
                 (__VA_ARGS__) \
-            ) \
+            ) __VA_ARGS__ \
         ) \
     )
 

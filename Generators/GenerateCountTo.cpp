@@ -38,7 +38,7 @@ R"(
         content += "    MPT_COUNT_TO_" + std::to_string(i - 1) + "_(prefix, suffix)\n\n";
     }
 
-    content += "\n#endif";
+    content += "\n#endif\n";
 
     std::cout << content;
 }

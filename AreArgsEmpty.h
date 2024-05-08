@@ -2,9 +2,10 @@
 #define MPT_IS_EMPTY_ARGS_H
 
 #include "./ArgsCount.h"
+#include "./Miscellaneous.h"
 
-#define MPT_IS_ARGS_EMPTY( ... ) \
-    MPT_COMPOSE \
+#define MPT_ARE_ARGS_EMPTY( ... ) \
+    INTERNAL_MPT_COMPOSE2 \
     ( \
         INTERNAL_MPT_GET_COUNT, \
         ( \
