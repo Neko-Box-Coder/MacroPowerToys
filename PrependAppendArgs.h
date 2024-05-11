@@ -21,7 +21,7 @@
         ( \
             INTERNAL_MPT_COMPOSE16, \
             ( \
-                INTERNAL_MPT_DELAYED_SELECT, \
+                INTERNAL_MPT_DELAYED_SELECT7, \
                 ( INTERNAL_MPT_PREPEND_APPEND_ARGS, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
             ) \
         ), \
@@ -30,7 +30,7 @@
             append \
             INTERNAL_MPT_COMPOSE17 \
             ( \
-                MPT_DELAYED_CONCAT3 \
+                MPT_DELAYED_CONCAT8 \
                 ( \
                     INTERNAL_MPT_PREPEND_COMMA_, MPT_ARE_ARGS_EMPTY( __VA_ARGS__ ) \
                 ), \

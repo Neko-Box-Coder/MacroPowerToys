@@ -8,7 +8,7 @@
         ( \
             INTERNAL_MPT_COMPOSE8 \
             ( \
-                INTERNAL_MPT_SELECT, \
+                INTERNAL_MPT_SELECT4, \
                 ( NAME, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
             ), \
             (__VA_ARGS__) \
