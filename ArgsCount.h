@@ -27,7 +27,7 @@
                                 ,,,,,,,,,
 
 #define MPT_ARGS_COUNT( ... ) \
-    INTERNAL_MPT_COMPOSE \
+    INTERNAL_MPT_COMPOSE4 \
     ( \
         INTERNAL_MPT_GET_COUNT, \
         ( \

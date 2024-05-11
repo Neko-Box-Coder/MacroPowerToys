@@ -39,9 +39,21 @@
 #define INTERNAL_MPT_DELAY3( ... ) __VA_ARGS__
 #define INTERNAL_MPT_DELAY4( ... ) __VA_ARGS__
 #define INTERNAL_MPT_DELAY5( ... ) __VA_ARGS__
+#define INTERNAL_MPT_DELAY6( ... ) __VA_ARGS__
 #define INTERNAL_MPT_DELAY7( ... ) __VA_ARGS__
 #define INTERNAL_MPT_DELAY8( ... ) __VA_ARGS__
 #define INTERNAL_MPT_DELAY9( ... ) __VA_ARGS__
+#define INTERNAL_MPT_DELAY10( ... ) __VA_ARGS__
+#define INTERNAL_MPT_DELAY11( ... ) __VA_ARGS__
+#define INTERNAL_MPT_DELAY12( ... ) __VA_ARGS__
+#define INTERNAL_MPT_DELAY13( ... ) __VA_ARGS__
+#define INTERNAL_MPT_DELAY14( ... ) __VA_ARGS__
+#define INTERNAL_MPT_DELAY15( ... ) __VA_ARGS__
+#define INTERNAL_MPT_DELAY16( ... ) __VA_ARGS__
+#define INTERNAL_MPT_DELAY17( ... ) __VA_ARGS__
+#define INTERNAL_MPT_DELAY18( ... ) __VA_ARGS__
+#define INTERNAL_MPT_DELAY19( ... ) __VA_ARGS__
+#define INTERNAL_MPT_DELAY20( ... ) __VA_ARGS__
 #define INTERNAL_MPT_DELAY_ONE( x ) x
 
 #define INTERNAL_MPT_CONCAT( A, B ) A ## B
@@ -83,6 +95,17 @@
 #define INTERNAL_MPT_COMPOSE7( macro, args ) macro args
 #define INTERNAL_MPT_COMPOSE8( macro, args ) macro args
 #define INTERNAL_MPT_COMPOSE9( macro, args ) macro args
+#define INTERNAL_MPT_COMPOSE10( macro, args ) macro args
+#define INTERNAL_MPT_COMPOSE11( macro, args ) macro args
+#define INTERNAL_MPT_COMPOSE12( macro, args ) macro args
+#define INTERNAL_MPT_COMPOSE13( macro, args ) macro args
+#define INTERNAL_MPT_COMPOSE14( macro, args ) macro args
+#define INTERNAL_MPT_COMPOSE15( macro, args ) macro args
+#define INTERNAL_MPT_COMPOSE16( macro, args ) macro args
+#define INTERNAL_MPT_COMPOSE17( macro, args ) macro args
+#define INTERNAL_MPT_COMPOSE18( macro, args ) macro args
+#define INTERNAL_MPT_COMPOSE19( macro, args ) macro args
+#define INTERNAL_MPT_COMPOSE20( macro, args ) macro args
 
 
 #define INTERNAL_MPT_DELAYED_COMPOSE( macro, args ) INTERNAL_MPT_COMPOSE( macro, INTERNAL_MPT_DELAY(args) )
@@ -94,6 +117,17 @@
 #define INTERNAL_MPT_DELAYED_COMPOSE7( macro, args ) INTERNAL_MPT_COMPOSE7( macro, INTERNAL_MPT_DELAY7(args) )
 #define INTERNAL_MPT_DELAYED_COMPOSE8( macro, args ) INTERNAL_MPT_COMPOSE8( macro, INTERNAL_MPT_DELAY8(args) )
 #define INTERNAL_MPT_DELAYED_COMPOSE9( macro, args ) INTERNAL_MPT_COMPOSE9( macro, INTERNAL_MPT_DELAY9(args) )
+#define INTERNAL_MPT_DELAYED_COMPOSE10( macro, args ) INTERNAL_MPT_COMPOSE10( macro, INTERNAL_MPT_DELAY10(args) )
+#define INTERNAL_MPT_DELAYED_COMPOSE11( macro, args ) INTERNAL_MPT_COMPOSE11( macro, INTERNAL_MPT_DELAY11(args) )
+#define INTERNAL_MPT_DELAYED_COMPOSE12( macro, args ) INTERNAL_MPT_COMPOSE12( macro, INTERNAL_MPT_DELAY12(args) )
+#define INTERNAL_MPT_DELAYED_COMPOSE13( macro, args ) INTERNAL_MPT_COMPOSE13( macro, INTERNAL_MPT_DELAY13(args) )
+#define INTERNAL_MPT_DELAYED_COMPOSE14( macro, args ) INTERNAL_MPT_COMPOSE14( macro, INTERNAL_MPT_DELAY14(args) )
+#define INTERNAL_MPT_DELAYED_COMPOSE15( macro, args ) INTERNAL_MPT_COMPOSE15( macro, INTERNAL_MPT_DELAY15(args) )
+#define INTERNAL_MPT_DELAYED_COMPOSE16( macro, args ) INTERNAL_MPT_COMPOSE16( macro, INTERNAL_MPT_DELAY16(args) )
+#define INTERNAL_MPT_DELAYED_COMPOSE17( macro, args ) INTERNAL_MPT_COMPOSE17( macro, INTERNAL_MPT_DELAY17(args) )
+#define INTERNAL_MPT_DELAYED_COMPOSE18( macro, args ) INTERNAL_MPT_COMPOSE18( macro, INTERNAL_MPT_DELAY18(args) )
+#define INTERNAL_MPT_DELAYED_COMPOSE19( macro, args ) INTERNAL_MPT_COMPOSE19( macro, INTERNAL_MPT_DELAY19(args) )
+#define INTERNAL_MPT_DELAYED_COMPOSE20( macro, args ) INTERNAL_MPT_COMPOSE20( macro, INTERNAL_MPT_DELAY20(args) )
 
 
 #endif

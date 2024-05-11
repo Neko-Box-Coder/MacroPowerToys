@@ -7,7 +7,7 @@
 
 
 #define MPT_APPEND_LISTS_ITEMS( ... ) \
-    INTERNAL_MPT_DELAYED_COMPOSE3 \
+    INTERNAL_MPT_DELAYED_COMPOSE \
     ( \
         INTERNAL_MPT_COMPOSE2 \
         ( \

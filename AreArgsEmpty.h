@@ -5,7 +5,7 @@
 #include "./Miscellaneous.h"
 
 #define MPT_ARE_ARGS_EMPTY( ... ) \
-    INTERNAL_MPT_COMPOSE2 \
+    INTERNAL_MPT_COMPOSE3 \
     ( \
         INTERNAL_MPT_GET_COUNT, \
         ( \
