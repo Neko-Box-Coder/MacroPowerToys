@@ -44,6 +44,11 @@ int TEST__MPT_ARGS_COUNT__EMPTY(void)
     return MPT_ARGS_COUNT();
 }
 
+int TEST__MPT_ARGS_COUNT_PAREN_FIRST_ARG()
+{
+    return MPT_ARGS_COUNT((std::tuple<int, int>)) + MPT_ARGS_COUNT((std::tuple<int, int>), int);
+}
+
 void TEST__MPT_COUNT_TO(void)
 {
     int MPT_COUNT_TO_3_(a, b);
@@ -159,6 +164,8 @@ int main(int argc, char** argv)
     TEST__MPT_CONCAT_LISTS_ITEMS();
     assert( TEST__MPT_ARGS_COUNT(1, 2) == 2 );
     assert( TEST__MPT_ARGS_COUNT__EMPTY() == 0 );
+    assert( TEST__MPT_ARGS_COUNT_PAREN_FIRST_ARG() == 3 );
+    
     TEST__MPT_COUNT_TO();
     TEST__MPT_COUNT_TO_MINUS_1();
     TEST__MPT_GET_LAST_ARG(1, 2, 3);

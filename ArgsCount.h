@@ -15,7 +15,8 @@
                                 _93, _94, _95, _96, _97, _98, _99, \
                                 COUNT, ... ) COUNT
 
-#define INTERNAL_MPT_EXPAND()   ,,,,,,,,,, \
+#define INTERNAL_MPT_EXPAND_INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS() \
+                                ,,,,,,,,,, \
                                 ,,,,,,,,,, \
                                 ,,,,,,,,,, \
                                 ,,,,,,,,,, \
@@ -26,12 +27,24 @@
                                 ,,,,,,,,,, \
                                 ,,,,,,,,,
 
+#define INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS(...) FIRST_ARG
+#define INTERNAL_MPT_MULTI_CONCAT_INNER( A, ... ) A ## __VA_ARGS__
+#define INTERNAL_MPT_MULTI_CONCAT( A, ... ) INTERNAL_MPT_MULTI_CONCAT_INNER(A, __VA_ARGS__)
+
 #define MPT_ARGS_COUNT( ... ) \
-    INTERNAL_MPT_COMPOSE4 \
+    INTERNAL_MPT_DELAYED_COMPOSE4 \
     ( \
         INTERNAL_MPT_GET_COUNT, \
         ( \
-            INTERNAL_MPT_EXPAND __VA_ARGS__ (), \
+            INTERNAL_MPT_COMPOSE5 \
+            ( \
+                INTERNAL_MPT_MULTI_CONCAT \
+                ( \
+                    INTERNAL_MPT_EXPAND_, \
+                    INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS __VA_ARGS__ \
+                ), \
+                () \
+            ), \
             0, 99, 98, 97, 96, 95, 94, 93, 92, 91, \
             90, 89, 88, 87, 86, 85, 84, 83, 82, 81, \
             80, 79, 78, 77, 76, 75, 74, 73, 72, 71, \
@@ -44,7 +57,6 @@
             10, 9, 8, 7, 6, 5, 4, 3, 2, 1 \
         ) \
     )
-
 
 #define INTERNAL_MPT_ARGS_COUNT( ... ) \
     MPT_ARGS_COUNT( __VA_ARGS__ )
