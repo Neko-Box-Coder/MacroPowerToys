@@ -100,6 +100,11 @@ void TEST__UTILS(void)
     (void)ITEM_3;
 }
 
+float TEST__REMOVE_PARENTHESIS_IN_LIST( MPT_REMOVE_PARENTHESIS_IN_LIST((int a), (float b), int c) )
+{
+    return a + b + c;
+}
+
 void TEST__MPT_OVERLOAD_MACRO(void)
 {
     #define MACRO_FUNC_0() 0
@@ -171,6 +176,7 @@ int main(int argc, char** argv)
     TEST__MPT_GET_LAST_ARG(1, 2, 3);
     TEST__MPT_ARE_ARGS_EMPTY();
     TEST__UTILS();
+    assert( TEST__REMOVE_PARENTHESIS_IN_LIST(5, 6.f, 2) == 13 );
     TEST__MPT_OVERLOAD_MACRO();
     TEST__MPT_PREFIX_SUFFIX_ARGS();
     
