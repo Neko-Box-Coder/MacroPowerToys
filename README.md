@@ -12,7 +12,8 @@ Just include `MacroPowerToys.h` to enjoy the macros.
 - [Generate a list that counts up to the number](#generate-a-list-that-counts-up-to-the-number)
 - [Get the last argument](#get-the-last-argument)
 - [Check if arguments are empty or not](#check-if-arguments-are-empty-or-not)
-- [Miscellaneous Macros (Concatenating, Composing, Remove parentheses)](#miscellaneous-macros-concatenating-composing-remove-parentheses)
+- [Remove parenthesis](#remove-parenthesis)
+- [Miscellaneous Macros (Concatenating, Composing)](#miscellaneous-macros-concatenating-composing)
 - [Macro Function Overloading](#macro-function-overloading)
 - [Prefixing, Suffixing, Prepending or Appending to all arguments](#prefixing-suffixing-prepending-or-appending-to-all-arguments)
 
@@ -103,7 +104,29 @@ EMPTY
 NOT_EMPTY
 ```
 
-### Miscellaneous Macros (Concatenating, Composing, Remove parentheses)
+### Remove parenthesis
+- `MPT_REMOVE_PARENTHESIS( argument )`
+    - This removes any outer parenthesis for `argument` if there's any
+- `MPT_REMOVE_PARENTHESIS_IN_LIST( arguments )`
+    - Same as `MPT_REMOVE_PARENTHESIS` but does it for each item in the list
+
+```c
+MPT_REMOVE_PARENTHESIS( (ITEM_1) )
+MPT_REMOVE_PARENTHESIS( (ITEM_1, ITEM_2) )
+MPT_REMOVE_PARENTHESIS( ITEM_2 )
+
+MPT_REMOVE_PARENTHESIS_IN_LIST( (ITEM_1), (ITEM_1, ITEM_2), ITEM_2 )
+
+//Expands to...
+
+ITEM_1
+ITEM_1, ITEM_2
+ITEM_2
+
+ITEM_1, ITEM_1, ITEM_2, ITEM_2
+```
+
+### Miscellaneous Macros (Concatenating, Composing)
 - `MPT_CONCAT( a, b )`
     - This has 20 copies for nested calling
     > `MPT_CONCAT2( a, b )`, `MPT_CONCAT3( a, b )`, etc...
@@ -114,19 +137,18 @@ NOT_EMPTY
     > `MPT_COMPOSE2( a, b )`, `MPT_COMPOSE3( a, b )`, etc...
     - This also has a delayed version for ability to not expand immediately
     > `MPT_DELAYED_COMPOSE( a, b )`, `MPT_DELAYED_COMPOSE2( a, b )`, etc...
-- `MPT_REMOVE_PARENTHESIS( a, b )`
-- `MPT_DELAY(...)` Delays the expansion of the arguments
+- `MPT_DELAY(...)` 
+    - Delays the expansion of the arguments
 ```c
 
 MPT_CONCAT( ITEM_1, ITEM_2 )
 MPT_COMPOSE( ITEM_1, ITEM_2 )
-MPT_REMOVE_PARENTHESIS( (ITEM_1, ITEM_2) )
 MPT_DELAY(ITEM_1, ITEM_2)
+
 //Expands to...
 
 ITEM_1ITEM_2
 ITEM_1 ITEM_2
-ITEM_1, ITEM_2
 ITEM_1, ITEM_2
 ```
 

@@ -1,6 +1,7 @@
 //NOTE: Up to 99 arguments
 
 #include "./Miscellaneous.h"
+#include "./RemoveParenthesisInList.h"
 #include "./AppendListsItems.h"
 #include "./ArgsCount.h"
 #include "./ConcatListsItems.h"
