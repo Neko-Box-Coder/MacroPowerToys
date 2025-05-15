@@ -11,3 +11,4 @@
 #include "./Overload.h"
 #include "./PrefixSuffixArgs.h"
 #include "./PrependAppendArgs.h"
+#include "./PersistentCounter.h"

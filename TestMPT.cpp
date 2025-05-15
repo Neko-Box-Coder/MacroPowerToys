@@ -160,11 +160,20 @@ void TEST__MPT_PREPEND_APPEND_ARGS__EMPTY(MPT_PREPEND_APPEND_ARGS(a, b, ) void)
     
 }
 
+MPT_START_COUNTER_AND_INCREMENT(TestCounter, 0);
+
+MPT_INCREMENT_COUNTER(1);
+MPT_INCREMENT_COUNTER(2);
+
 int main(int argc, char** argv)
 {
     (void)argc;
     (void)argv;
     
+    MPT_START_COUNTER_AND_INCREMENT(TestCounter2, 3);
+    
+    MPT_INCREMENT_COUNTER(4);
+
     TEST__MPT_APPEND_LISTS_ITEMS(1, 'a', NULL);
     TEST__MPT_CONCAT_LISTS_ITEMS();
     assert( TEST__MPT_ARGS_COUNT(1, 2) == 2 );
@@ -180,11 +189,19 @@ int main(int argc, char** argv)
     TEST__MPT_OVERLOAD_MACRO();
     TEST__MPT_PREFIX_SUFFIX_ARGS();
     
+    MPT_INCREMENT_COUNTER(5);
+    
     int testInt;
     float testFloat;
     char testChar;
     TEST__MPT_PREPEND_APPEND_ARGS(&testInt, &testFloat, &testChar);
     TEST__MPT_PREPEND_APPEND_ARGS__EMPTY();
+
+    MPT_INCREMENT_COUNTER(6);
+
+    assert( MPT_GET_COUNT_AND_INCREMENT(TestCounter, 7) == 7 );
+
+    assert( MPT_GET_COUNT_AND_INCREMENT(TestCounter2, 8) == 8 - 3 );
 
     printf("All tests passed\n");
     

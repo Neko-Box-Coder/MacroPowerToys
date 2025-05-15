@@ -16,7 +16,7 @@ Just include `MacroPowerToys.h` from the root repository directory and enjoy the
 - [Miscellaneous Macros (Concatenating, Composing)](#miscellaneous-macros-concatenating-composing)
 - [Macro Function Overloading](#macro-function-overloading)
 - [Prefixing, Suffixing, Prepending or Appending to all arguments](#prefixing-suffixing-prepending-or-appending-to-all-arguments)
-
+- [Persistent Counter](#persistent-counter)
 
 ### Appending / Concatenating items between two lists
 
@@ -161,14 +161,14 @@ ITEM_1, ITEM_2
 #define MACRO_FUNC_1( a ) a
 #define MACRO_FUNC_2( a, b ) a + b
 
-// Using MPT_OVERLOAD_MACRO to allow MACRO_FUNC to be overloaded based on number of arguments
+//Using MPT_OVERLOAD_MACRO to allow MACRO_FUNC to be overloaded based on number of arguments
 #define MACRO_FUNC( ... ) MPT_OVERLOAD_MACRO( MACRO_FUNC, __VA_ARGS__ )
 
 MACRO_FUNC()
 MACRO_FUNC(10)
 MACRO_FUNC(1, 2)
 
-// Expands to...
+//Expands to...
 
 0       //MACRO_FUNC_0()
 10      //MACRO_FUNC_1(10)
@@ -184,8 +184,44 @@ MACRO_FUNC(1, 2)
 MPT_PREFIX_SUFFIX_ARGS( /* no prefix*/, _suffix, a1, a2, a3 )
 MPT_PREPEND_APPEND_ARGS( const, /* no append */, int, char, char* )
 
-// Expands to...
+//Expands to...
 
 a1_suffix, a2_suffix, a3_suffix
 const int, const char, const char*
+```
+
+### Persistent Counter
+
+- `MPT_START_COUNTER_AND_INCREMENT(name, [optional note])`
+- `MPT_INCREMENT_COUNTER([optional note])`
+- `MPT_GET_COUNT_AND_INCREMENT(name, [optional note])`
+
+```c
+
+//Given `__COUNTER__` is currently 0
+
+MPT_START_COUNTER_AND_INCREMENT(MyCounter, /* any note here */);
+MPT_INCREMENT_COUNTER(/* or no note at all */);
+MPT_INCREMENT_COUNTER(2 /* or note to keep track of current __COUNTER__ */);
+
+MPT_START_COUNTER_AND_INCREMENT(MyCounter2);
+MPT_INCREMENT_COUNTER();
+MPT_INCREMENT_COUNTER();
+
+MPT_GET_COUNT_AND_INCREMENT(MyCounter);
+MPT_GET_COUNT_AND_INCREMENT(MyCounter2);
+
+//Expands to...
+
+enum { MyCounter = 0 };
+enum { INTERNAL_MPT1 = 1 };
+enum { INTERNAL_MPT2 = 2 };
+
+enum { MyCounter2 = 3 };
+enum { INTERNAL_MPT4 = 4 };
+enum { INTERNAL_MPT5 = 5 };
+
+6 - MyCounter;  //6
+7 - MyCounter2; //4
+
 ```

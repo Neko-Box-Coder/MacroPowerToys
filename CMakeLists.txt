@@ -20,15 +20,15 @@ if (CMAKE_C_COMPILER_ID STREQUAL "MSVC")
     set(MPT_STANDARD_COMPILE_FLAGS "/utf-8;/W1")
 else()
     set(MPT_STANDARD_COMPILE_FLAGS  "-Wall"
-                                "-Wno-return-local-addr"
-                                "-Wno-sign-compare"
-                                "-Wno-unused-variable"
-                                "-Wno-unused-parameter"
-                                "-Wno-switch"
-                                "-Wno-gnu-zero-variadic-macro-arguments"
-                                "-Wextra"
-                                "-pedantic"
-                                "-Werror")
+                                    "-Wno-return-local-addr"
+                                    "-Wno-sign-compare"
+                                    "-Wno-unused-variable"
+                                    "-Wno-unused-parameter"
+                                    "-Wno-switch"
+                                    "-Wno-gnu-zero-variadic-macro-arguments"
+                                    "-Wextra"
+                                    "-pedantic"
+                                    "-Werror")
 endif()
 
 if(MACRO_POWER_TOYS_BUILD_TEST)
