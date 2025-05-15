@@ -3,7 +3,7 @@
 A collection of useful macros for manipulating the arguments. 
 Useful codebase that needs a decent amount of preprocessing before compiling.
 
-Just include `MacroPowerToys.h` to enjoy the macros.
+Just include `MacroPowerToys.h` from the root repository directory and enjoy the macros.
 
 ## Macros
 
