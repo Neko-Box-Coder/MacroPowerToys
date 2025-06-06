@@ -156,6 +156,9 @@ ITEM_1, ITEM_2
 
 - `MPT_OVERLOAD_MACRO( macroName, arguments )`
 
+> [!CAUTION]
+> Due to how macro overloading works, the first argument to the final macro (`macroName`) cannot start with parenthesis ('(')
+
 ```c
 #define MACRO_FUNC_0() 0
 #define MACRO_FUNC_1( a ) a
