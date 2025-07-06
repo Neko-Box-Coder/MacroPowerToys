@@ -116,6 +116,7 @@ void TEST__MPT_OVERLOAD_MACRO(void)
     assert( MACRO_FUNC() == 0 );
     assert( MACRO_FUNC(10) == 10 );
     assert( MACRO_FUNC(1, 2) == 3 );
+    assert( MACRO_FUNC((1), 2) == 3 ); //Testing first param with parentheses
 }
 
 void TEST__MPT_PREFIX_SUFFIX_ARGS(void)
