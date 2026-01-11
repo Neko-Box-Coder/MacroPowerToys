@@ -23,22 +23,22 @@ R"(
 #endif
 
 #define MPT_PREPEND_APPEND_ARGS( prepend, append, ... ) \
-    INTERNAL_MPT_DELAYED_COMPOSE5 \
+    INTERNAL_MPT_DELAYED_COMPOSE18 \
     ( \
-        INTERNAL_MPT_COMPOSE3 \
+        INTERNAL_MPT_COMPOSE16 \
         ( \
-            INTERNAL_MPT_COMPOSE2, \
+            INTERNAL_MPT_COMPOSE17, \
             ( \
-                INTERNAL_MPT_DELAYED_SELECT, \
+                INTERNAL_MPT_DELAYED_SELECT7, \
                 ( INTERNAL_MPT_PREPEND_APPEND_ARGS, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
             ) \
         ), \
         ( \
             prepend, \
             append \
-            INTERNAL_MPT_COMPOSE4 \
+            INTERNAL_MPT_COMPOSE16 \
             ( \
-                MPT_DELAYED_CONCAT3 \
+                INTERNAL_MPT_DELAYED_CONCAT7 \
                 ( \
                     INTERNAL_MPT_PREPEND_COMMA_, MPT_ARE_ARGS_EMPTY( __VA_ARGS__ ) \
                 ), \

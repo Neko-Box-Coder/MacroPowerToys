@@ -15,9 +15,9 @@ R"(
 
 
 #define MPT_CONCAT_LISTS_ITEMS( ... ) \
-    INTERNAL_MPT_COMPOSE2 \
+    INTERNAL_MPT_COMPOSE7 \
     ( \
-        INTERNAL_MPT_SELECT, \
+        INTERNAL_MPT_SELECT3, \
         ( INTERNAL_MPT_CONCAT_LISTS_ITEMS, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
     ) (__VA_ARGS__)
 

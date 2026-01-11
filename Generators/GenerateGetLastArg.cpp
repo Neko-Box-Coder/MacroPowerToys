@@ -14,9 +14,9 @@ R"(
 #include "./Miscellaneous.h"
 
 #define MPT_GET_LAST_ARG( ... ) \
-    INTERNAL_MPT_COMPOSE2 \
+    INTERNAL_MPT_COMPOSE8 \
     ( \
-        INTERNAL_MPT_SELECT, \
+        INTERNAL_MPT_SELECT4, \
         ( INTERNAL_MPT_GET_LAST_ARG, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
     ) (__VA_ARGS__)
 
