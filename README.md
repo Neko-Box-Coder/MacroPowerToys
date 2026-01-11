@@ -1,7 +1,7 @@
 # Macro Power Toys 🎲
 
 A collection of useful macros for manipulating the arguments. 
-Useful codebase that needs a decent amount of preprocessing before compiling.
+Useful for C99/C++11 codebase that needs a decent amount of preprocessing before compiling.
 
 Just include `MacroPowerToys.h` from the root repository directory and enjoy the macros.
 
