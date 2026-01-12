@@ -5,13 +5,13 @@
 #include "./Miscellaneous.h"
 
 #define MPT_ARE_ARGS_EMPTY( ... ) \
-    INTERNAL_MPT_DELAYED_COMPOSE3 \
+    INTERNAL_MPT_DELAYED_COMPOSE9 \
     ( \
         INTERNAL_MPT_GET_COUNT, \
         ( \
-            INTERNAL_MPT_COMPOSE4 \
+            INTERNAL_MPT_COMPOSE10 \
             ( \
-                INTERNAL_MPT_MULTI_CONCAT \
+                INTERNAL_MPT_DELAYED_MULTI_CONCAT3 \
                 ( \
                     INTERNAL_MPT_EXPAND_, \
                     INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS __VA_ARGS__ \

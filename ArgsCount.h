@@ -28,18 +28,15 @@
                                 ,,,,,,,,,
 
 #define INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS(...) FIRST_ARG
-#define INTERNAL_MPT_MULTI_CONCAT_INNER2( A, ... ) A ## __VA_ARGS__
-#define INTERNAL_MPT_MULTI_CONCAT_INNER( A, ... ) INTERNAL_MPT_MULTI_CONCAT_INNER2(A, __VA_ARGS__)
-#define INTERNAL_MPT_MULTI_CONCAT( A, ... ) INTERNAL_MPT_MULTI_CONCAT_INNER(A, __VA_ARGS__)
 
 #define MPT_ARGS_COUNT( ... ) \
-    INTERNAL_MPT_DELAYED_COMPOSE4 \
+    INTERNAL_MPT_DELAYED_COMPOSE5 \
     ( \
         INTERNAL_MPT_GET_COUNT, \
         ( \
-            INTERNAL_MPT_COMPOSE5 \
+            INTERNAL_MPT_COMPOSE6 \
             ( \
-                INTERNAL_MPT_MULTI_CONCAT \
+                INTERNAL_MPT_DELAYED_MULTI_CONCAT2 \
                 ( \
                     INTERNAL_MPT_EXPAND_, \
                     INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS __VA_ARGS__ \

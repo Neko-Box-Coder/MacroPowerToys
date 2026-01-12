@@ -15,22 +15,22 @@
 #endif
 
 #define MPT_PREFIX_SUFFIX_ARGS( prefix, suffix, ... ) \
-    INTERNAL_MPT_DELAYED_COMPOSE9 \
+    INTERNAL_MPT_DELAYED_COMPOSE15 \
     ( \
-        INTERNAL_MPT_COMPOSE10 \
+        INTERNAL_MPT_COMPOSE13 \
         ( \
-            INTERNAL_MPT_COMPOSE11, \
+            INTERNAL_MPT_COMPOSE14, \
             ( \
-                INTERNAL_MPT_DELAYED_SELECT5, \
+                INTERNAL_MPT_DELAYED_SELECT6, \
                 ( INTERNAL_MPT_PREFIX_SUFFIX_ARGS, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
             ) \
         ), \
         ( \
             prefix, \
             suffix \
-            INTERNAL_MPT_COMPOSE12 \
+            INTERNAL_MPT_COMPOSE13 \
             ( \
-                MPT_DELAYED_CONCAT6 \
+                INTERNAL_MPT_DELAYED_CONCAT6 \
                 ( \
                     INTERNAL_MPT_PREPEND_COMMA_, MPT_ARE_ARGS_EMPTY( __VA_ARGS__ ) \
                 ), \

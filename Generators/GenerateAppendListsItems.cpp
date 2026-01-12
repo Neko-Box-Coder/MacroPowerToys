@@ -17,9 +17,9 @@ R"(
 #define MPT_APPEND_LISTS_ITEMS( ... ) \
     INTERNAL_MPT_DELAYED_COMPOSE3 \
     ( \
-        INTERNAL_MPT_COMPOSE2 \
+        INTERNAL_MPT_COMPOSE4 \
         ( \
-            INTERNAL_MPT_SELECT, \
+            INTERNAL_MPT_SELECT2, \
             ( INTERNAL_MPT_APPEND_LISTS_ITEMS, INTERNAL_MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
         ), \
         (__VA_ARGS__) \
