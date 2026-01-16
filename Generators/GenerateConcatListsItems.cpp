@@ -9,16 +9,15 @@ R"(
 #ifndef MPT_CONCAT_LISTS_ITEMS_H
 #define MPT_CONCAT_LISTS_ITEMS_H
 
-#include "./Overload.h"
 #include "./Miscellaneous.h"
 #include "./ArgsCount.h"
 
 
 #define MPT_CONCAT_LISTS_ITEMS( ... ) \
-    INTERNAL_MPT_COMPOSE7 \
+    INTERNAL_MPT_COMPOSE9 \
     ( \
         INTERNAL_MPT_SELECT3, \
-        ( INTERNAL_MPT_CONCAT_LISTS_ITEMS, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
+        ( INTERNAL_MPT_CONCAT_LISTS_ITEMS, INTERNAL_MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
     ) (__VA_ARGS__)
 
 

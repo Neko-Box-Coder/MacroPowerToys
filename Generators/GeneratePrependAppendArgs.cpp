@@ -9,7 +9,6 @@ R"(
 #ifndef MPT_PREPEND_APPEND_ARGS_H
 #define MPT_PREPEND_APPEND_ARGS_H
 
-#include "./Overload.h"
 #include "./ArgsCount.h"
 #include "./AreArgsEmpty.h"
 #include "./Miscellaneous.h"
@@ -23,24 +22,24 @@ R"(
 #endif
 
 #define MPT_PREPEND_APPEND_ARGS( prepend, append, ... ) \
-    INTERNAL_MPT_DELAYED_COMPOSE18 \
+    INTERNAL_MPT_DELAYED_COMPOSE24 \
     ( \
-        INTERNAL_MPT_COMPOSE16 \
+        INTERNAL_MPT_COMPOSE22 \
         ( \
-            INTERNAL_MPT_COMPOSE17, \
+            INTERNAL_MPT_COMPOSE23, \
             ( \
-                INTERNAL_MPT_DELAYED_SELECT7, \
-                ( INTERNAL_MPT_PREPEND_APPEND_ARGS, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
+                INTERNAL_MPT_DELAYED_SELECT9, \
+                ( INTERNAL_MPT_PREPEND_APPEND_ARGS, INTERNAL_MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
             ) \
         ), \
         ( \
             prepend, \
             append \
-            INTERNAL_MPT_COMPOSE16 \
+            INTERNAL_MPT_COMPOSE22 \
             ( \
-                INTERNAL_MPT_DELAYED_CONCAT7 \
+                INTERNAL_MPT_DELAYED_CONCAT9 \
                 ( \
-                    INTERNAL_MPT_PREPEND_COMMA_, MPT_ARE_ARGS_EMPTY( __VA_ARGS__ ) \
+                    INTERNAL_MPT_PREPEND_COMMA_, INTERNAL_MPT_ARE_ARGS_EMPTY( __VA_ARGS__ ) \
                 ), \
                 (__VA_ARGS__) \
             ) __VA_ARGS__ \

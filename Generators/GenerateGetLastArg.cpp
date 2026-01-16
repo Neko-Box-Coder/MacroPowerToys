@@ -9,15 +9,14 @@ R"(
 #ifndef MPT_GET_LAST_ARG_H
 #define MPT_GET_LAST_ARG_H
 
-#include "./Overload.h"
 #include "./ArgsCount.h"
 #include "./Miscellaneous.h"
 
 #define MPT_GET_LAST_ARG( ... ) \
-    INTERNAL_MPT_COMPOSE8 \
+    INTERNAL_MPT_COMPOSE10 \
     ( \
         INTERNAL_MPT_SELECT4, \
-        ( INTERNAL_MPT_GET_LAST_ARG, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
+        ( INTERNAL_MPT_GET_LAST_ARG, INTERNAL_MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
     ) (__VA_ARGS__)
 
 

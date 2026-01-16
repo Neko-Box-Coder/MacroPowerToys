@@ -1,6 +1,8 @@
 #ifndef MPT_PERSISTENT_COUNTER_H
 #define MPT_PERSISTENT_COUNTER_H
 
+#include "./Miscellaneous.h"
+
 #ifdef __COUNTER__
     #define MPT_START_COUNTER_AND_INCREMENT(name, ...) enum { name = __COUNTER__ }
 

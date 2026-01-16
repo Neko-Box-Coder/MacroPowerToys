@@ -51,21 +51,60 @@ int TEST__MPT_ARGS_COUNT_PAREN_FIRST_ARG()
 
 void TEST__MPT_COUNT_TO(void)
 {
-    int MPT_COUNT_TO_3_(a, b);
-    (void)a1b;
-    (void)a2b;
-    (void)a3b;
+    {
+        int MPT_COUNT_TO_3_(a, b);
+        (void)a1b;
+        (void)a2b;
+        (void)a3b;
+    }
     
-    int MPT_COUNT_TO_0_(a, b) c;
-    (void)c;
+    {
+        int MPT_COUNT_TO(3, a, b);
+        (void)a1b;
+        (void)a2b;
+        (void)a3b;
+    }
+    
+    {
+        int MPT_COUNT_TO_0_(a, b) c;
+        (void)c;
+    }
+    
+    {
+        int MPT_COUNT_TO(0, a, b) c;
+        (void)c;
+    }
 }
 
 void TEST__MPT_COUNT_TO_MINUS_1(void)
 {
-    int MPT_COUNT_TO_4_MINUS_1(a, b);
-    (void)a1b;
-    (void)a2b;
-    (void)a3b;
+    {
+        int MPT_COUNT_TO_4_MINUS_1(a, b);
+        (void)a1b;
+        (void)a2b;
+        (void)a3b;
+    }
+    
+    {
+        int MPT_COUNT_TO_MINUS_1(4, a, b);
+        (void)a1b;
+        (void)a2b;
+        (void)a3b;
+    }
+}
+
+#define REPEAT_TEST_SHUFFLE(arg1, arg2, arg3, arg4, arg5, arg6) arg1 arg4, arg2 arg5, arg3 arg6
+void TEST__MPT_REPEAT( MPT_DELAYED_COMPOSE(REPEAT_TEST_SHUFFLE, (MPT_REPEAT_WITH_COMMA(3, int), c, d, e)) )
+{
+    (void)c;
+    (void)d;
+    (void)e;
+    
+    int a[MPT_REPEAT(3, +, 5)] = {MPT_REPEAT_WITH_COMMA(15, 3)};
+    (void)a;
+    
+    int b[MPT_REPEAT(3, +, 2)] = {0, 0, 0, 0, 0, 0};
+    (void)b;
 }
 
 void TEST__MPT_GET_LAST_ARG(int a, int b, int c)
@@ -183,6 +222,7 @@ int main(int argc, char** argv)
     
     TEST__MPT_COUNT_TO();
     TEST__MPT_COUNT_TO_MINUS_1();
+    TEST__MPT_REPEAT(1, 2, 3);
     TEST__MPT_GET_LAST_ARG(1, 2, 3);
     TEST__MPT_ARE_ARGS_EMPTY();
     TEST__UTILS();

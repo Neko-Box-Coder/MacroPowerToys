@@ -10,6 +10,7 @@ Just include `MacroPowerToys.h` from the root repository directory and enjoy the
 - [Appending / Concatenating items between two lists](#appending-concatenating-items-between-two-lists)
 - [Counting the number of arguments](#counting-the-number-of-arguments)
 - [Generate a list that counts up to the number](#generate-a-list-that-counts-up-to-the-number)
+- [Repeat the arguments with delimiter](#repeat-the-arguments-with-delimiter)
 - [Get the last argument](#get-the-last-argument)
 - [Check if arguments are empty or not](#check-if-arguments-are-empty-or-not)
 - [Remove parenthesis](#remove-parenthesis)
@@ -49,7 +50,7 @@ a1b1, a2b2
 
 ### Counting the number of arguments
 
-- `MPT_ARGS_COUNT( arguments )`
+- `MPT_ARGS_COUNT( <arguments> )`
 ```c
 //Count lists items, up to 100 items
 MPT_ARGS_COUNT( a1, a2, a3, a4 )
@@ -60,23 +61,48 @@ MPT_ARGS_COUNT( a1, a2, a3, a4 )
 ```
 
 ### Generate a list that counts up to the number
-
+- `MPT_COUNT_TO(number, prefix, suffix)`
+- `MPT_COUNT_TO_MINUS_1(number, prefix, suffix)`
 - `MPT_COUNT_TO_<Number>_(prefix, suffix)`
 - `MPT_COUNT_TO_<Number>_MINUS_1(prefix, suffix)`
 ```c
-//Create a list that counts up to 5
+MPT_COUNT_TO( 5, /* no prefix */, _suffix )
+MPT_COUNT_TO_MINUS_1( 4, prefix_, /* no suffix */ )
+
 MPT_COUNT_TO_5_( prefix_, /* no suffix */ )
 MPT_COUNT_TO_3_MINUS_1( _, _ )
 
 //Expands to...
 
+1_suffix, 2_suffix, 3_suffix, 4_suffix, 5_suffix
+prefix_1, prefix_2, prefix_3
+
 prefix_1, prefix_2, prefix_3, prefix_4, prefix_5
 _1_, _2_
 ```
 
+### Repeat the arguments with delimiter
+- `MPT_REPEAT(number, delimiter, <arguments>)`
+- `MPT_REPEAT_WITH_COMMA(number, <arguments>)`
+```c
+MPT_REPEAT(3, , int)
+MPT_REPEAT(2, |, 1, 2)
+
+MPT_REPEAT_WITH_COMMA(3, a)
+MPT_REPEAT_WITH_COMMA(2, a, b)
+
+//Expands to...
+
+int int int
+1, 2 | 1, 2
+
+a, a, a
+a, b, a, b
+```
+
 ### Get the last argument
 
-- `MPT_GET_LAST_ARG( arguments )`
+- `MPT_GET_LAST_ARG( <arguments> )`
 ```c
 //Get the last argument in the list
 MPT_GET_LAST_ARG( a1, a2, a3, a4 )
@@ -88,7 +114,7 @@ a4
 
 ### Check if arguments are empty or not
 
-- `MPT_ARE_ARGS_EMPTY( arguments )`
+- `MPT_ARE_ARGS_EMPTY( <arguments> )`
 ```c
 
 //Check if the list is empty
@@ -107,7 +133,7 @@ NOT_EMPTY
 ### Remove parenthesis
 - `MPT_REMOVE_PARENTHESIS( argument )`
     - This removes any outer parenthesis for `argument` if there's any
-- `MPT_REMOVE_PARENTHESIS_IN_LIST( arguments )`
+- `MPT_REMOVE_PARENTHESIS_IN_LIST( <arguments> )`
     - Same as `MPT_REMOVE_PARENTHESIS` but does it for each item in the list
 
 ```c
@@ -154,7 +180,7 @@ ITEM_1, ITEM_2
 
 ### Macro Function Overloading
 
-- `MPT_OVERLOAD_MACRO( macroName, arguments )`
+- `MPT_OVERLOAD_MACRO( macroName, <arguments> )`
 
 ```c
 #define MACRO_FUNC_0() 0
@@ -177,8 +203,8 @@ MACRO_FUNC(1, 2)
 
 ### Prefixing, Suffixing, Prepending or Appending to all arguments
 
-- `MPT_PREFIX_SUFFIX_ARGS( prefix, suffix, arguments )`
-- `MPT_PREPEND_APPEND_ARGS( prepend, append, arguments )`
+- `MPT_PREFIX_SUFFIX_ARGS( prefix, suffix, <arguments> )`
+- `MPT_PREPEND_APPEND_ARGS( prepend, append, <arguments> )`
 
 ```c
 MPT_PREFIX_SUFFIX_ARGS( /* no prefix*/, _suffix, a1, a2, a3 )

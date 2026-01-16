@@ -9,7 +9,6 @@ R"(
 #ifndef MPT_PREFIX_SUFFIX_ARGS_H
 #define MPT_PREFIX_SUFFIX_ARGS_H
 
-#include "./Overload.h"
 #include "./ArgsCount.h"
 #include "./AreArgsEmpty.h"
 #include "./Miscellaneous.h"
@@ -23,24 +22,24 @@ R"(
 #endif
 
 #define MPT_PREFIX_SUFFIX_ARGS( prefix, suffix, ... ) \
-    INTERNAL_MPT_DELAYED_COMPOSE15 \
+    INTERNAL_MPT_DELAYED_COMPOSE21 \
     ( \
-        INTERNAL_MPT_COMPOSE13 \
+        INTERNAL_MPT_COMPOSE19 \
         ( \
-            INTERNAL_MPT_COMPOSE14, \
+            INTERNAL_MPT_COMPOSE20, \
             ( \
-                INTERNAL_MPT_DELAYED_SELECT6, \
-                ( INTERNAL_MPT_PREFIX_SUFFIX_ARGS, MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
+                INTERNAL_MPT_DELAYED_SELECT8, \
+                ( INTERNAL_MPT_PREFIX_SUFFIX_ARGS, INTERNAL_MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
             ) \
         ), \
         ( \
             prefix, \
             suffix \
-            INTERNAL_MPT_COMPOSE13 \
+            INTERNAL_MPT_COMPOSE19 \
             ( \
-                INTERNAL_MPT_DELAYED_CONCAT6 \
+                INTERNAL_MPT_DELAYED_CONCAT8 \
                 ( \
-                    INTERNAL_MPT_PREPEND_COMMA_, MPT_ARE_ARGS_EMPTY( __VA_ARGS__ ) \
+                    INTERNAL_MPT_PREPEND_COMMA_, INTERNAL_MPT_ARE_ARGS_EMPTY( __VA_ARGS__ ) \
                 ), \
                 (__VA_ARGS__) \
             ) __VA_ARGS__ \
