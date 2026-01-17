@@ -46,6 +46,24 @@
                                 _93, _94, _95, _96, _97, _98, _99, \
                                 COUNT, ... ) COUNT
 
+#ifndef INTERNAL_MPT_EXPAND_INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS
+    #define INTERNAL_MPT_EXPAND_INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS() \
+                                    ,,,,,,,,,, \
+                                    ,,,,,,,,,, \
+                                    ,,,,,,,,,, \
+                                    ,,,,,,,,,, \
+                                    ,,,,,,,,,, \
+                                    ,,,,,,,,,, \
+                                    ,,,,,,,,,, \
+                                    ,,,,,,,,,, \
+                                    ,,,,,,,,,, \
+                                    ,,,,,,,,,
+#endif
+
+#ifndef INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS
+    #define INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS(...) FIRST_ARG
+#endif
+
 #define MPT_ARE_ARGS_EMPTY( ... ) \
     INTERNAL_MPT_IE_DELAYED_COMPOSE \
     ( \
