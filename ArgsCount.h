@@ -99,7 +99,7 @@
 #define MPT_ARGS_COUNT( ... ) \
     INTERNAL_MPT_AC_DELAYED_COMPOSE \
     ( \
-        INTERNAL_MPT_GET_COUNT4, \
+        INTERNAL_MPT_GET_COUNT, \
         ( \
             INTERNAL_MPT_AC_COMPOSE3 \
             ( \
@@ -126,7 +126,7 @@
 #define INTERNAL_MPT_ARGS_COUNT( ... ) \
     INTERNAL_MPT_AC_DELAYED_COMPOSE2 \
     ( \
-        INTERNAL_MPT_GET_COUNT5, \
+        INTERNAL_MPT_GET_COUNT2, \
         ( \
             INTERNAL_MPT_AC_COMPOSE4 \
             ( \

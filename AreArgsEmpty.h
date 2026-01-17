@@ -27,7 +27,7 @@
 #define MPT_ARE_ARGS_EMPTY( ... ) \
     INTERNAL_MPT_IE_DELAYED_COMPOSE \
     ( \
-        INTERNAL_MPT_GET_COUNT2, \
+        INTERNAL_MPT_GET_COUNT3, \
         ( \
             INTERNAL_MPT_IE_COMPOSE3 \
             ( \
@@ -54,7 +54,7 @@
 #define INTERNAL_MPT_ARE_ARGS_EMPTY( ... ) \
     INTERNAL_MPT_IE_DELAYED_COMPOSE2 \
     ( \
-        INTERNAL_MPT_GET_COUNT3, \
+        INTERNAL_MPT_GET_COUNT4, \
         ( \
             INTERNAL_MPT_IE_COMPOSE4 \
             ( \
