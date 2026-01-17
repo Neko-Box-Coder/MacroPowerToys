@@ -2,12 +2,16 @@
 #define MPT_GET_LAST_ARG_H
 
 #include "./ArgsCount.h"
-#include "./Miscellaneous.h"
+
+#define INTERNAL_MPT_GLA_COMPOSE( A, B ) A B
+
+#define INTERNAL_MPT_GLA_CONCAT( A, B ) A ## B
+#define INTERNAL_MPT_GLA_SELECT( NAME, NUM ) INTERNAL_MPT_GLA_CONCAT( NAME ## _, NUM )
 
 #define MPT_GET_LAST_ARG( ... ) \
-    INTERNAL_MPT_COMPOSE10 \
+    INTERNAL_MPT_GLA_COMPOSE \
     ( \
-        INTERNAL_MPT_SELECT4, \
+        INTERNAL_MPT_GLA_SELECT, \
         ( INTERNAL_MPT_GET_LAST_ARG, INTERNAL_MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
     ) (__VA_ARGS__)
 

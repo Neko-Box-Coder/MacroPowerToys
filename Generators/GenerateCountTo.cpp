@@ -9,25 +9,44 @@ R"(
 #ifndef MPT_COUNT_TO_H
 #define MPT_COUNT_TO_H
 
-#include "./Miscellaneous.h"
+#define INTERNAL_MPT_CT_COMPOSE( A, B ) A B
+#define INTERNAL_MPT_CT_COMPOSE2( A, B ) A B
+#define INTERNAL_MPT_CT_COMPOSE3( A, B ) A B
+#define INTERNAL_MPT_CT_COMPOSE4( A, B ) A B
+#define INTERNAL_MPT_CT_COMPOSE5( A, B ) A B
+#define INTERNAL_MPT_CT_COMPOSE6( A, B ) A B
+#define INTERNAL_MPT_CT_COMPOSE7( A, B ) A B
+#define INTERNAL_MPT_CT_COMPOSE8( A, B ) A B
+
+#define INTERNAL_MPT_CT_CONCAT( A, B ) A ## B
+#define INTERNAL_MPT_CT_SELECT( NAME, NUM ) INTERNAL_MPT_CT_CONCAT( NAME ## _, NUM )
+
+#define INTERNAL_MPT_CT_CONCAT2( A, B ) A ## B
+#define INTERNAL_MPT_CT_SELECT2( NAME, NUM ) INTERNAL_MPT_CT_CONCAT2( NAME ## _, NUM )
+
+#define INTERNAL_MPT_CT_CONCAT3( A, B ) A ## B
+#define INTERNAL_MPT_CT_SELECT3( NAME, NUM ) INTERNAL_MPT_CT_CONCAT3( NAME ## _, NUM )
+
+#define INTERNAL_MPT_CT_CONCAT4( A, B ) A ## B
+#define INTERNAL_MPT_CT_SELECT4( NAME, NUM ) INTERNAL_MPT_CT_CONCAT4( NAME ## _, NUM )
 
 #define MPT_COUNT_TO(num, prefix, suffix) \
-    INTERNAL_MPT_COMPOSE25 \
+    INTERNAL_MPT_CT_COMPOSE \
     ( \
-        INTERNAL_MPT_COMPOSE26 \
+        INTERNAL_MPT_CT_COMPOSE2 \
         ( \
-            INTERNAL_MPT_SELECT10, \
+            INTERNAL_MPT_CT_SELECT, \
             ( MPT_COUNT_TO, num ) \
         ), \
         (prefix, suffix) \
     )
 
 #define MPT_COUNT_TO_MINUS_1(num, prefix, suffix) \
-    INTERNAL_MPT_COMPOSE27 \
+    INTERNAL_MPT_CT_COMPOSE3 \
     ( \
-        INTERNAL_MPT_COMPOSE28 \
+        INTERNAL_MPT_CT_COMPOSE4 \
         ( \
-            INTERNAL_MPT_SELECT11, \
+            INTERNAL_MPT_CT_SELECT2, \
             ( INTERNAL_MPT_COUNT_TO_MINUS_1, num ) \
         ), \
         (prefix, suffix) \
@@ -37,22 +56,22 @@ R"(
 #define MPT_COUNT_TO_0_(prefix, suffix)
 
 #define MPT_REPEAT(num, delimiter, ...) \
-    INTERNAL_MPT_COMPOSE29 \
+    INTERNAL_MPT_CT_COMPOSE5 \
     ( \
-        INTERNAL_MPT_COMPOSE30 \
+        INTERNAL_MPT_CT_COMPOSE6 \
         ( \
-            INTERNAL_MPT_SELECT12, \
+            INTERNAL_MPT_CT_SELECT3, \
             ( INTERNAL_MPT_EVAL, num ) \
         ), \
         (delimiter, __VA_ARGS__) \
     )
 
 #define MPT_REPEAT_WITH_COMMA(num, ...) \
-    INTERNAL_MPT_COMPOSE31 \
+    INTERNAL_MPT_CT_COMPOSE7 \
     ( \
-        INTERNAL_MPT_COMPOSE32 \
+        INTERNAL_MPT_CT_COMPOSE8 \
         ( \
-            INTERNAL_MPT_SELECT13, \
+            INTERNAL_MPT_CT_SELECT4, \
             ( INTERNAL_MPT_EVAL_WITH_COMMA, num ) \
         ), \
         (__VA_ARGS__) \

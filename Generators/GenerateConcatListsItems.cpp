@@ -9,14 +9,16 @@ R"(
 #ifndef MPT_CONCAT_LISTS_ITEMS_H
 #define MPT_CONCAT_LISTS_ITEMS_H
 
-#include "./Miscellaneous.h"
 #include "./ArgsCount.h"
 
+#define INTERNAL_MPT_CLI_COMPOSE( A, B ) A B
+#define INTERNAL_MPT_CLI_CONCAT( A, B ) A ## B
+#define INTERNAL_MPT_CLI_SELECT( NAME, NUM ) INTERNAL_MPT_CLI_CONCAT( NAME ## _, NUM )
 
 #define MPT_CONCAT_LISTS_ITEMS( ... ) \
-    INTERNAL_MPT_COMPOSE9 \
+    INTERNAL_MPT_CLI_COMPOSE \
     ( \
-        INTERNAL_MPT_SELECT3, \
+        INTERNAL_MPT_CLI_SELECT, \
         ( INTERNAL_MPT_CONCAT_LISTS_ITEMS, INTERNAL_MPT_ARGS_COUNT( __VA_ARGS__ ) ) \
     ) (__VA_ARGS__)
 
