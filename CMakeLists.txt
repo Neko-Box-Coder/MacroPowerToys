@@ -32,19 +32,30 @@ else()
 endif()
 
 if(MACRO_POWER_TOYS_BUILD_TEST)
-    add_executable(TestMPT "${CMAKE_CURRENT_LIST_DIR}/TestMPT.c")
-    set_target_properties(  TestMPT PROPERTIES 
-                            C_STANDARD 99
-                            C_STANDARD_REQUIRED ON)
-    target_link_libraries(TestMPT INTERFACE MacroPowerToys)
-    target_compile_options(TestMPT PUBLIC "${MPT_STANDARD_COMPILE_FLAGS}")
     
-    add_executable(TestMPT_Cpp "${CMAKE_CURRENT_LIST_DIR}/TestMPT.cpp")
-    set_target_properties(  TestMPT_Cpp PROPERTIES 
-                            CXX_STANDARD 11
-                            CXX_STANDARD_REQUIRED ON)
-    target_link_libraries(TestMPT_Cpp INTERFACE MacroPowerToy)
-    target_compile_options(TestMPT_Cpp PUBLIC "${MPT_STANDARD_COMPILE_FLAGS}")
+    file(GLOB C_EXAMPLES "${CMAKE_CURRENT_LIST_DIR}/Examples/*.c")
+    foreach(examplePath ${C_EXAMPLES})
+        get_filename_component(exampleName "${examplePath}" NAME_WE)
+        
+        add_executable(${exampleName}C "${examplePath}")
+        set_target_properties(  ${exampleName}C PROPERTIES 
+                                C_STANDARD 99
+                                C_STANDARD_REQUIRED ON)
+        target_link_libraries(${exampleName}C PUBLIC MacroPowerToys)
+        target_compile_options(${exampleName}C PUBLIC "${MPT_STANDARD_COMPILE_FLAGS}")
+    endforeach()
+
+    file(GLOB CPP_EXAMPLES "${CMAKE_CURRENT_LIST_DIR}/Examples/*.cpp")
+    foreach(examplePath ${CPP_EXAMPLES})
+        get_filename_component(exampleName "${examplePath}" NAME_WE)
+        
+        add_executable(${exampleName}Cpp "${examplePath}")
+        set_target_properties(  ${exampleName}Cpp PROPERTIES 
+                                CXX_STANDARD 11
+                                CXX_STANDARD_REQUIRED ON)
+        target_link_libraries(${exampleName}Cpp PUBLIC MacroPowerToys)
+        target_compile_options(${exampleName}Cpp PUBLIC "${MPT_STANDARD_COMPILE_FLAGS}")
+    endforeach()
 endif()
 
 if(MACRO_POWER_TOYS_BUILD_GENERATORS)

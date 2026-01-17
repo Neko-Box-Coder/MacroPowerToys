@@ -234,11 +234,8 @@ pipeline
                         bash "ls -lah"
                         bash "ls -lah ./Build"
                         
-                        bash "chmod +x ./Build/TestMPT"
-                        bash "cd ./Build && ./TestMPT"
-                        
-                        bash "chmod +x ./Build/TestMPT_Cpp"
-                        bash "cd ./Build && ./TestMPT_Cpp"
+                        bash "chmod +x ./RunAllExamples.sh"
+                        bash "cd ./Build && ../RunAllExamples.sh"
                     }
                     post { failure { script { FAILED_STAGE = env.STAGE_NAME } } }
                 }
@@ -253,8 +250,8 @@ pipeline
                         bat 'dir'
                         bat 'dir .\\Build'
                         bat 'dir .\\Build\\Debug'
-                        bat 'cd .\\Build\\Debug && .\\TestMPT.exe'
-                        bat 'cd .\\Build\\Debug && .\\TestMPT_Cpp.exe'
+                        
+                        bat 'cd .\\Build\\Debug && ..\\..\\RunAllExamples.bat'
                     }
                     post { failure { script { FAILED_STAGE = env.STAGE_NAME } } }
                 }
