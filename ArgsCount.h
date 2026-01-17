@@ -46,7 +46,7 @@
                                 _93, _94, _95, _96, _97, _98, _99, \
                                 COUNT, ... ) COUNT
 
-#define INTERNAL_MPT_EXPAND_INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS() \
+#define INTERNAL_MPT_AC_EXPAND_INTERNAL_MPT_AC_PROTECT_FIRST_ARG_PARENS() \
                                 ,,,,,,,,,, \
                                 ,,,,,,,,,, \
                                 ,,,,,,,,,, \
@@ -58,7 +58,7 @@
                                 ,,,,,,,,,, \
                                 ,,,,,,,,,
 
-#define INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS(...) FIRST_ARG
+#define INTERNAL_MPT_AC_PROTECT_FIRST_ARG_PARENS(...) FIRST_ARG
 
 #define MPT_ARGS_COUNT( ... ) \
     INTERNAL_MPT_AC_DELAYED_COMPOSE \
@@ -69,8 +69,8 @@
             ( \
                 INTERNAL_MPT_AC_DELAYED_MULTI_CONCAT \
                 ( \
-                    INTERNAL_MPT_EXPAND_, \
-                    INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS __VA_ARGS__ \
+                    INTERNAL_MPT_AC_EXPAND_, \
+                    INTERNAL_MPT_AC_PROTECT_FIRST_ARG_PARENS __VA_ARGS__ \
                 ), \
                 () \
             ), \
@@ -96,8 +96,8 @@
             ( \
                 INTERNAL_MPT_AC_DELAYED_MULTI_CONCAT2 \
                 ( \
-                    INTERNAL_MPT_EXPAND_, \
-                    INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS __VA_ARGS__ \
+                    INTERNAL_MPT_AC_EXPAND_, \
+                    INTERNAL_MPT_AC_PROTECT_FIRST_ARG_PARENS __VA_ARGS__ \
                 ), \
                 () \
             ), \

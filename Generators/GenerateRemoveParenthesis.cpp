@@ -38,23 +38,19 @@ R"(
 #define INTERNAL_MPT_RPIL_DELAYED_COMPOSE_INNER3(macro, args) INTERNAL_MPT_RPIL_COMPOSE3( macro, args )
 #define INTERNAL_MPT_RPIL_DELAYED_COMPOSE3(macro, args) INTERNAL_MPT_RPIL_DELAYED_COMPOSE_INNER3( macro, INTERNAL_MPT_RPIL_DELAY3(args) )
 
-#ifndef INTERNAL_MPT_EXPAND_INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS
-    #define INTERNAL_MPT_EXPAND_INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS() \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,
-#endif
+#define INTERNAL_MPT_RPIL_EXPAND_INTERNAL_MPT_RPIL_PROTECT_FIRST_ARG_PARENS() \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,
 
-#ifndef INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS
-    #define INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS(...) FIRST_ARG
-#endif
+#define INTERNAL_MPT_RPIL_PROTECT_FIRST_ARG_PARENS(...) FIRST_ARG
 
 #define INTERNAL_MPT_RPIL_GET_COUNT(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, \
                                 _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, \
@@ -77,8 +73,8 @@ R"(
             ( \
                 INTERNAL_MPT_RPIL_DELAYED_MULTI_CONCAT2 \
                 ( \
-                    INTERNAL_MPT_EXPAND_, \
-                    INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS __VA_ARGS__ \
+                    INTERNAL_MPT_RPIL_EXPAND_, \
+                    INTERNAL_MPT_RPIL_PROTECT_FIRST_ARG_PARENS __VA_ARGS__ \
                 ), \
                 () \
             ), \
@@ -96,12 +92,12 @@ R"(
     )
 
 
-#define INTERNAL_MPT_REMOVE_PARENTHESIS( ... ) INTERNAL_MPT_REMOVE_PARENTHESIS __VA_ARGS__
+#define INTERNAL_MPT_RPIL_REMOVE_PARENTHESIS( ... ) INTERNAL_MPT_RPIL_REMOVE_PARENTHESIS __VA_ARGS__
 
-#define INTERNAL_MPT_CANCEL_INTERNAL_MPT_REMOVE_PARENTHESIS
+#define INTERNAL_MPT_RPIL_CANCEL_INTERNAL_MPT_RPIL_REMOVE_PARENTHESIS
 
 #define MPT_REMOVE_PARENTHESIS( ... ) \
-    INTERNAL_MPT_RPIL_DELAYED_MULTI_CONCAT(INTERNAL_MPT_CANCEL_, INTERNAL_MPT_REMOVE_PARENTHESIS __VA_ARGS__)
+    INTERNAL_MPT_RPIL_DELAYED_MULTI_CONCAT(INTERNAL_MPT_RPIL_CANCEL_, INTERNAL_MPT_RPIL_REMOVE_PARENTHESIS __VA_ARGS__)
 
 #define MPT_REMOVE_PARENTHESIS_IN_LIST( ... ) \
     INTERNAL_MPT_RPIL_DELAYED_COMPOSE \

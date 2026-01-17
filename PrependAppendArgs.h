@@ -1,60 +1,54 @@
 #ifndef MPT_PREPEND_APPEND_ARGS_H
 #define MPT_PREPEND_APPEND_ARGS_H
 
-#include "./AreArgsEmpty.h"
+#define INTERNAL_MPT_PAA_COMPOSE( A, B ) A B
+#define INTERNAL_MPT_PAA_COMPOSE2( A, B ) A B
+#define INTERNAL_MPT_PAA_COMPOSE3( A, B ) A B
+#define INTERNAL_MPT_PAA_COMPOSE4( A, B ) A B
 
-#define INTERNAL_MPT_PPA_COMPOSE( A, B ) A B
-#define INTERNAL_MPT_PPA_COMPOSE2( A, B ) A B
-#define INTERNAL_MPT_PPA_COMPOSE3( A, B ) A B
-#define INTERNAL_MPT_PPA_COMPOSE4( A, B ) A B
+#define INTERNAL_MPT_PAA_DELAY( ... ) __VA_ARGS__
+#define INTERNAL_MPT_PAA_DELAYED_COMPOSE_INNER(macro, args) INTERNAL_MPT_PAA_COMPOSE( macro, args )
+#define INTERNAL_MPT_PAA_DELAYED_COMPOSE(macro, args) INTERNAL_MPT_PAA_DELAYED_COMPOSE_INNER( macro, INTERNAL_MPT_PAA_DELAY(args) )
 
-#define INTERNAL_MPT_PPA_DELAY( ... ) __VA_ARGS__
-#define INTERNAL_MPT_PPA_DELAYED_COMPOSE_INNER(macro, args) INTERNAL_MPT_PPA_COMPOSE( macro, args )
-#define INTERNAL_MPT_PPA_DELAYED_COMPOSE(macro, args) INTERNAL_MPT_PPA_DELAYED_COMPOSE_INNER( macro, INTERNAL_MPT_PPA_DELAY(args) )
+#define INTERNAL_MPT_PAA_CONCAT( A, B ) A ## B
+#define INTERNAL_MPT_PAA_SELECT( NAME, NUM ) INTERNAL_MPT_PAA_CONCAT( NAME ## _, NUM )
+#define INTERNAL_MPT_PAA_DELAYED_SELECT_INNER( NAME, NUM ) INTERNAL_MPT_PAA_SELECT( NAME, NUM )
+#define INTERNAL_MPT_PAA_DELAYED_SELECT( NAME, NUM ) INTERNAL_MPT_PAA_DELAYED_SELECT_INNER( NAME, NUM )
 
-#define INTERNAL_MPT_PPA_CONCAT( A, B ) A ## B
-#define INTERNAL_MPT_PPA_SELECT( NAME, NUM ) INTERNAL_MPT_PPA_CONCAT( NAME ## _, NUM )
-#define INTERNAL_MPT_PPA_DELAYED_SELECT_INNER( NAME, NUM ) INTERNAL_MPT_PPA_SELECT( NAME, NUM )
-#define INTERNAL_MPT_PPA_DELAYED_SELECT( NAME, NUM ) INTERNAL_MPT_PPA_DELAYED_SELECT_INNER( NAME, NUM )
-
-#define INTERNAL_MPT_PPA_CONCAT2( A, B ) A ## B
-#define INTERNAL_MPT_PPA_DELAYED_CONCAT2_INNER(A, B) INTERNAL_MPT_PPA_CONCAT2(A, B)
-#define INTERNAL_MPT_PPA_DELAYED_CONCAT2(A, B) INTERNAL_MPT_PPA_DELAYED_CONCAT2_INNER(A, B)
+#define INTERNAL_MPT_PAA_CONCAT2( A, B ) A ## B
+#define INTERNAL_MPT_PAA_DELAYED_CONCAT2_INNER(A, B) INTERNAL_MPT_PAA_CONCAT2(A, B)
+#define INTERNAL_MPT_PAA_DELAYED_CONCAT2(A, B) INTERNAL_MPT_PAA_DELAYED_CONCAT2_INNER(A, B)
 
 //----------------------------------
 //Get Counts
 //----------------------------------
 
-#define INTERNAL_MPT_PPA_MULTI_CONCAT( A, ... ) A ## __VA_ARGS__
-#define INTERNAL_MPT_PPA_DELAYED_MULTI_CONCAT_INNER(A, ...) INTERNAL_MPT_PPA_MULTI_CONCAT(A, __VA_ARGS__)
-#define INTERNAL_MPT_PPA_DELAYED_MULTI_CONCAT(A, ...) INTERNAL_MPT_PPA_DELAYED_MULTI_CONCAT_INNER(A, __VA_ARGS__)
+#define INTERNAL_MPT_PAA_MULTI_CONCAT( A, ... ) A ## __VA_ARGS__
+#define INTERNAL_MPT_PAA_DELAYED_MULTI_CONCAT_INNER(A, ...) INTERNAL_MPT_PAA_MULTI_CONCAT(A, __VA_ARGS__)
+#define INTERNAL_MPT_PAA_DELAYED_MULTI_CONCAT(A, ...) INTERNAL_MPT_PAA_DELAYED_MULTI_CONCAT_INNER(A, __VA_ARGS__)
 
-#define INTERNAL_MPT_PPA_COMPOSE5( A, B ) A B
-#define INTERNAL_MPT_PPA_COMPOSE6( A, B ) A B
+#define INTERNAL_MPT_PAA_COMPOSE5( A, B ) A B
+#define INTERNAL_MPT_PAA_COMPOSE6( A, B ) A B
 
-#define INTERNAL_MPT_PPA_DELAY5( ... ) __VA_ARGS__
-#define INTERNAL_MPT_PPA_DELAYED_COMPOSE_INNER5(macro, args) INTERNAL_MPT_PPA_COMPOSE5( macro, args )
-#define INTERNAL_MPT_PPA_DELAYED_COMPOSE5(macro, args) INTERNAL_MPT_PPA_DELAYED_COMPOSE_INNER5( macro, INTERNAL_MPT_PPA_DELAY5(args) )
+#define INTERNAL_MPT_PAA_DELAY5( ... ) __VA_ARGS__
+#define INTERNAL_MPT_PAA_DELAYED_COMPOSE_INNER5(macro, args) INTERNAL_MPT_PAA_COMPOSE5( macro, args )
+#define INTERNAL_MPT_PAA_DELAYED_COMPOSE5(macro, args) INTERNAL_MPT_PAA_DELAYED_COMPOSE_INNER5( macro, INTERNAL_MPT_PAA_DELAY5(args) )
 
-#ifndef INTERNAL_MPT_EXPAND_INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS
-    #define INTERNAL_MPT_EXPAND_INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS() \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,
-#endif
+#define INTERNAL_MPT_PAA_EXPAND_INTERNAL_MPT_PAA_PROTECT_FIRST_ARG_PARENS() \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,
 
-#ifndef INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS
-    #define INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS(...) FIRST_ARG
-#endif
+#define INTERNAL_MPT_PAA_PROTECT_FIRST_ARG_PARENS(...) FIRST_ARG
 
-#define INTERNAL_MPT_PPA_GET_COUNT(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, \
+#define INTERNAL_MPT_PAA_GET_COUNT(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, \
                                 _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, \
                                 _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, \
                                 _33, _34, _35, _36, _37, _38, _39, _40, _41, _42, \
@@ -66,17 +60,17 @@
                                 _93, _94, _95, _96, _97, _98, _99, \
                                 COUNT, ... ) COUNT
 
-#define INTERNAL_MPT_PPA_ARGS_COUNT( ... ) \
-    INTERNAL_MPT_PPA_DELAYED_COMPOSE5 \
+#define INTERNAL_MPT_PAA_ARGS_COUNT( ... ) \
+    INTERNAL_MPT_PAA_DELAYED_COMPOSE5 \
     ( \
-        INTERNAL_MPT_PPA_GET_COUNT, \
+        INTERNAL_MPT_PAA_GET_COUNT, \
         ( \
-            INTERNAL_MPT_PPA_COMPOSE6 \
+            INTERNAL_MPT_PAA_COMPOSE6 \
             ( \
-                INTERNAL_MPT_PPA_DELAYED_MULTI_CONCAT \
+                INTERNAL_MPT_PAA_DELAYED_MULTI_CONCAT \
                 ( \
-                    INTERNAL_MPT_EXPAND_, \
-                    INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS __VA_ARGS__ \
+                    INTERNAL_MPT_PAA_EXPAND_, \
+                    INTERNAL_MPT_PAA_PROTECT_FIRST_ARG_PARENS __VA_ARGS__ \
                 ), \
                 () \
             ), \
@@ -93,35 +87,96 @@
         ) \
     )
 
+//----------------------------------
+//Are Args Empty
+//----------------------------------
 
+#define INTERNAL_MPT_PAA_COMPOSE7( A, B ) A B
+#define INTERNAL_MPT_PAA_COMPOSE8( A, B ) A B
 
-#ifndef INTERNAL_MPT_PREPEND_COMMA_EMPTY
-    #define INTERNAL_MPT_PREPEND_COMMA_EMPTY(...)
-#endif
+#define INTERNAL_MPT_PAA_DELAY7( ... ) __VA_ARGS__
+#define INTERNAL_MPT_PAA_DELAYED_COMPOSE_INNER7(macro, args) INTERNAL_MPT_PAA_COMPOSE7( macro, args )
+#define INTERNAL_MPT_PAA_DELAYED_COMPOSE7(macro, args) INTERNAL_MPT_PAA_DELAYED_COMPOSE_INNER7( macro, INTERNAL_MPT_PAA_DELAY7(args) )
 
-#ifndef INTERNAL_MPT_PREPEND_COMMA_NOT_EMPTY
-    #define INTERNAL_MPT_PREPEND_COMMA_NOT_EMPTY(...) ,
-#endif
+#define INTERNAL_MPT_PAA_MULTI_CONCAT2( A, ... ) A ## __VA_ARGS__
+#define INTERNAL_MPT_PAA_DELAYED_MULTI_CONCAT_INNER2(A, ...) INTERNAL_MPT_PAA_MULTI_CONCAT2(A, __VA_ARGS__)
+#define INTERNAL_MPT_PAA_DELAYED_MULTI_CONCAT2(A, ...) INTERNAL_MPT_PAA_DELAYED_MULTI_CONCAT_INNER2(A, __VA_ARGS__)
+
+#define INTERNAL_MPT_PAA_EXPAND_INTERNAL_MPT_PAA_PROTECT_FIRST_ARG_PARENS2() \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,
+
+#define INTERNAL_MPT_PAA_PROTECT_FIRST_ARG_PARENS2(...) FIRST_ARG
+
+#define INTERNAL_MPT_PAA_GET_COUNT2(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, \
+                                _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, \
+                                _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, \
+                                _33, _34, _35, _36, _37, _38, _39, _40, _41, _42, \
+                                _43, _44, _45, _46, _47, _48, _49, _50, _51, _52, \
+                                _53, _54, _55, _56, _57, _58, _59, _60, _61, _62, \
+                                _63, _64, _65, _66, _67, _68, _69, _70, _71, _72, \
+                                _73, _74, _75, _76, _77, _78, _79, _80, _81, _82, \
+                                _83, _84, _85, _86, _87, _88, _89, _90, _91, _92, \
+                                _93, _94, _95, _96, _97, _98, _99, \
+                                COUNT, ... ) COUNT
+
+#define INTERNAL_MPT_PAA_ARE_ARGS_EMPTY( ... ) \
+    INTERNAL_MPT_PAA_DELAYED_COMPOSE7 \
+    ( \
+        INTERNAL_MPT_PAA_GET_COUNT2, \
+        ( \
+            INTERNAL_MPT_PAA_COMPOSE8 \
+            ( \
+                INTERNAL_MPT_PAA_DELAYED_MULTI_CONCAT2 \
+                ( \
+                    INTERNAL_MPT_PAA_EXPAND_, \
+                    INTERNAL_MPT_PAA_PROTECT_FIRST_ARG_PARENS2 __VA_ARGS__ \
+                ), \
+                () \
+            ), \
+            EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
+            NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
+            NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
+            NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
+            NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
+            NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
+            NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
+            NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
+            NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
+            NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
+        ) \
+    )
+
+#define INTERNAL_MPT_PAA_PREPEND_COMMA_EMPTY(...)
+#define INTERNAL_MPT_PAA_PREPEND_COMMA_NOT_EMPTY(...) ,
 
 #define MPT_PREPEND_APPEND_ARGS( prepend, append, ... ) \
-    INTERNAL_MPT_PPA_DELAYED_COMPOSE \
+    INTERNAL_MPT_PAA_DELAYED_COMPOSE \
     ( \
-        INTERNAL_MPT_PPA_COMPOSE2 \
+        INTERNAL_MPT_PAA_COMPOSE2 \
         ( \
-            INTERNAL_MPT_PPA_COMPOSE3, \
+            INTERNAL_MPT_PAA_COMPOSE3, \
             ( \
-                INTERNAL_MPT_PPA_DELAYED_SELECT, \
-                ( INTERNAL_MPT_PREPEND_APPEND_ARGS, INTERNAL_MPT_PPA_ARGS_COUNT( __VA_ARGS__ ) ) \
+                INTERNAL_MPT_PAA_DELAYED_SELECT, \
+                ( INTERNAL_MPT_PREPEND_APPEND_ARGS, INTERNAL_MPT_PAA_ARGS_COUNT( __VA_ARGS__ ) ) \
             ) \
         ), \
         ( \
             prepend, \
             append \
-            INTERNAL_MPT_PPA_COMPOSE4 \
+            INTERNAL_MPT_PAA_COMPOSE4 \
             ( \
-                INTERNAL_MPT_PPA_DELAYED_CONCAT2 \
+                INTERNAL_MPT_PAA_DELAYED_CONCAT2 \
                 ( \
-                    INTERNAL_MPT_PREPEND_COMMA_, INTERNAL_MPT_ARE_ARGS_EMPTY( __VA_ARGS__ ) \
+                    INTERNAL_MPT_PAA_PREPEND_COMMA_, INTERNAL_MPT_PAA_ARE_ARGS_EMPTY( __VA_ARGS__ ) \
                 ), \
                 (__VA_ARGS__) \
             ) __VA_ARGS__ \

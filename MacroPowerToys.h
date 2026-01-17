@@ -8,7 +8,7 @@
 #include "./GetLastArg.h"
 #include "./AreArgsEmpty.h"
 #include "./Overload.h"
-#include "./PrefixSuffixArgs.h"             //INTERNAL_MPT_ARE_ARGS_EMPTY
-#include "./PrependAppendArgs.h"            //INTERNAL_MPT_ARE_ARGS_EMPTY
+#include "./PrefixSuffixArgs.h"
+#include "./PrependAppendArgs.h"
 #include "./CountTo.h"
 #include "./PersistentCounter.h"

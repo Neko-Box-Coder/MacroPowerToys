@@ -28,23 +28,19 @@ R"(
 #define INTERNAL_MPT_CLI_DELAYED_COMPOSE_INNER2(macro, args) INTERNAL_MPT_CLI_COMPOSE2( macro, args )
 #define INTERNAL_MPT_CLI_DELAYED_COMPOSE2(macro, args) INTERNAL_MPT_CLI_DELAYED_COMPOSE_INNER2( macro, INTERNAL_MPT_CLI_DELAY2(args) )
 
-#ifndef INTERNAL_MPT_EXPAND_INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS
-    #define INTERNAL_MPT_EXPAND_INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS() \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,, \
-                                    ,,,,,,,,,
-#endif
+#define INTERNAL_MPT_CLI_EXPAND_INTERNAL_MPT_CLI_PROTECT_FIRST_ARG_PARENS() \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,, \
+                                ,,,,,,,,,
 
-#ifndef INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS
-    #define INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS(...) FIRST_ARG
-#endif
+#define INTERNAL_MPT_CLI_PROTECT_FIRST_ARG_PARENS(...) FIRST_ARG
 
 #define INTERNAL_MPT_CLI_GET_COUNT(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, \
                                 _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, \
@@ -67,8 +63,8 @@ R"(
             ( \
                 INTERNAL_MPT_CLI_DELAYED_MULTI_CONCAT \
                 ( \
-                    INTERNAL_MPT_EXPAND_, \
-                    INTERNAL_MPT_PROTECT_FIRST_ARG_PARENS __VA_ARGS__ \
+                    INTERNAL_MPT_CLI_EXPAND_, \
+                    INTERNAL_MPT_CLI_PROTECT_FIRST_ARG_PARENS __VA_ARGS__ \
                 ), \
                 () \
             ), \
