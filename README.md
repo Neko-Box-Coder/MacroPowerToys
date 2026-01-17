@@ -18,6 +18,7 @@ Just include `MacroPowerToys.h` from the root repository directory and enjoy the
 - [Macro Function Overloading](#macro-function-overloading)
 - [Prefixing, Suffixing, Prepending or Appending to all arguments](#prefixing-suffixing-prepending-or-appending-to-all-arguments)
 - [Persistent Counter](#persistent-counter)
+- [\_\_VA_OPT\_\_ equivalent](#__va_opt__-equivalent)
 
 ### Appending / Concatenating items between two lists
 
@@ -249,5 +250,25 @@ enum { INTERNAL_MPT5 = 5 };
 
 6 - MyCounter;  //6
 7 - MyCounter2; //4
+```
 
+### \_\_VA_OPT\_\_ equivalent
+
+- `MPT_ARGS_OPT( (args), (nonEmptyExpand) )`
+
+```c
+
+MPT_ARGS_OPT( (a), (a) ) 123
+MPT_ARGS_OPT( (a,b), (a,b) ) 123
+MPT_ARGS_OPT( (a,b), (,) ) 123
+
+MPT_ARGS_OPT( (), (abc) ) 123
+
+//Expands to...
+
+a 123
+a,b 123
+, 123
+
+123
 ```
