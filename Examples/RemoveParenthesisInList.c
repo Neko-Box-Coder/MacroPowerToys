@@ -22,6 +22,6 @@ int main(int argc, char** argv)
     
     TEST__REMOVE_PARENTHESIS();
     assert( TEST__REMOVE_PARENTHESIS_IN_LIST(5, 6.f, 2) == 13 );
-    printf("Passed\n");
+    printf(__FILE__" Passed\n");
     return 0;
 }

@@ -19,6 +19,6 @@ int main(int argc, char** argv)
     (void)argv;
 
     TEST__MPT_CONCAT_LISTS_ITEMS();
-    printf("Passed\n");
+    printf(__FILE__" Passed\n");
     return 0;
 }

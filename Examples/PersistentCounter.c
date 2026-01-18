@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 
     assert( MPT_GET_COUNT_AND_INCREMENT(TestCounter2, 8) == 8 - 3 );
 
-    printf("Passed\n");
+    printf(__FILE__" Passed\n");
     
     return 0;
 }

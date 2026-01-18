@@ -43,6 +43,6 @@ int main(int argc, char** argv)
     char testChar = 'a';
     TEST__MPT_PREPEND_APPEND_ARGS(&testInt, &testFloat, &testChar);
     TEST__MPT_PREPEND_APPEND_ARGS__EMPTY();
-    printf("Passed\n");
+    printf(__FILE__" Passed\n");
     return 0;
 }

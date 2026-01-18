@@ -30,6 +30,6 @@ int main(int argc, char** argv)
     assert( TEST__MPT_ARGS_COUNT(1, 2) == 2 );
     assert( TEST__MPT_ARGS_COUNT__EMPTY() == 0 );
     assert( TEST__MPT_ARGS_COUNT_PAREN_FIRST_ARG() == 3 );
-    printf("Passed\n");
+    printf(__FILE__" Passed\n");
     return 0;
 }

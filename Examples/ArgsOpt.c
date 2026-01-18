@@ -23,6 +23,6 @@ int main(int argc, char** argv)
     
     TEST__MPT_ARGS_OPT(1, 2);
     TEST__MPT_ARGS_OPT2(1);
-    printf("Passed\n");
+    printf(__FILE__" Passed\n");
     return 0;
 }

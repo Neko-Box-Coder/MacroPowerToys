@@ -22,6 +22,6 @@ int main(int argc, char** argv)
     (void)argv;
     
     TEST__MPT_ARE_ARGS_EMPTY();
-    printf("Passed\n");
+    printf(__FILE__" Passed\n");
     return 0;
 }

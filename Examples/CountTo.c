@@ -79,6 +79,6 @@ int main(int argc, char** argv)
     TEST__MPT_COUNT_TO();
     TEST__MPT_COUNT_TO_MINUS_1();
     TEST__MPT_REPEAT(1, 2, 3);
-    printf("Passed\n");
+    printf(__FILE__" Passed\n");
     return 0;
 }

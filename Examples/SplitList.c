@@ -16,6 +16,6 @@ int main(int argc, char** argv)
     (void) test.b;
     (void) test.c;
     
-    printf("Passed\n");
+    printf(__FILE__" Passed\n");
     return 0;
 }

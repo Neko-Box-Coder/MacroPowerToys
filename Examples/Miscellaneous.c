@@ -18,6 +18,6 @@ int main(int argc, char** argv)
     (void)argv;
     
     TEST__UTILS();
-    printf("Passed\n");
+    printf(__FILE__" Passed\n");
     return 0;
 }
