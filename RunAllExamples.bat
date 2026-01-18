@@ -15,6 +15,7 @@ SETLOCAL ENABLEEXTENSIONS
 .\OverloadC.exe || goto :error
 .\PrefixSuffixArgsC.exe || goto :error
 .\RemoveParenthesisInListC.exe || goto :error
+.\SplitListC.exe || goto :error
 .\AppendListsItemsCpp.exe || goto :error
 .\ArgsCountCpp.exe || goto :error
 .\ConcatListsItemsCpp.exe || goto :error
@@ -28,6 +29,7 @@ SETLOCAL ENABLEEXTENSIONS
 .\OverloadCpp.exe || goto :error
 .\PrefixSuffixArgsCpp.exe || goto :error
 .\RemoveParenthesisInListCpp.exe || goto :error
+.\SplitListCpp.exe || goto :error
 
 goto :EOF
 

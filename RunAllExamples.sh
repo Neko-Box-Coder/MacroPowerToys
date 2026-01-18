@@ -14,7 +14,7 @@ chmod +x ./CountToC && ./CountToC
 chmod +x ./OverloadC && ./OverloadC
 chmod +x ./PrefixSuffixArgsC && ./PrefixSuffixArgsC
 chmod +x ./RemoveParenthesisInListC && ./RemoveParenthesisInListC
-
+chmod +x ./SplitListC && ./SplitListC
 
 chmod +x ./AppendListsItemsCpp && ./AppendListsItemsCpp
 chmod +x ./ArgsCountCpp && ./ArgsCountCpp
@@ -29,3 +29,4 @@ chmod +x ./CountToCpp && ./CountToCpp
 chmod +x ./OverloadCpp && ./OverloadCpp
 chmod +x ./PrefixSuffixArgsCpp && ./PrefixSuffixArgsCpp
 chmod +x ./RemoveParenthesisInListCpp && ./RemoveParenthesisInListCpp
+chmod +x ./SplitListCpp && ./SplitListCpp

@@ -79,5 +79,8 @@ if(MACRO_POWER_TOYS_BUILD_GENERATORS)
     
     add_executable(MPTGenerateRemoveParenthesis "${CMAKE_CURRENT_LIST_DIR}/Generators/GenerateRemoveParenthesis.cpp")
     target_compile_options(MPTGenerateRemoveParenthesis PUBLIC "${MPT_STANDARD_COMPILE_FLAGS}")
+    
+    add_executable(MPTGenerateSplitList "${CMAKE_CURRENT_LIST_DIR}/Generators/GenerateSplitList.cpp")
+    target_compile_options(MPTGenerateSplitList PUBLIC "${MPT_STANDARD_COMPILE_FLAGS}")
 endif()
 

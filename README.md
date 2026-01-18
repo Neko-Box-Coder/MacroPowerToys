@@ -4,6 +4,7 @@ A collection of useful macros for manipulating the arguments.
 Useful for C99/C++11 codebase that needs a decent amount of preprocessing before compiling.
 
 Just include `MacroPowerToys.h` from the root repository directory and enjoy the macros.
+Alternatively, you can also include the individual header, listed for each macros.
 
 ## Macros
 
@@ -19,11 +20,14 @@ Just include `MacroPowerToys.h` from the root repository directory and enjoy the
 - [Prefixing, Suffixing, Prepending or Appending to all arguments](#prefixing-suffixing-prepending-or-appending-to-all-arguments)
 - [Persistent Counter](#persistent-counter)
 - [\_\_VA_OPT\_\_ equivalent](#__va_opt__-equivalent)
+- [Split list with delimiter](#split-list-with-delimiter)
 
 ### Appending / Concatenating items between two lists
 
-- `MPT_APPEND_LISTS_ITEMS( commaSeparatedList1, commaSeparatedList2 )`
-- `MPT_CONCAT_LISTS_ITEMS( commaSeparatedList1, commaSeparatedList2 )`
+- `AppendListsItems.h`
+    - `MPT_APPEND_LISTS_ITEMS( commaSeparatedList1, commaSeparatedList2 )`
+- `ConcatListsItems.h`
+    - `MPT_CONCAT_LISTS_ITEMS( commaSeparatedList1, commaSeparatedList2 )`
 ```c
 //Appending lists items, up to 100 items
 MPT_APPEND_LISTS_ITEMS( a1, a2, b1, b2 )
@@ -51,7 +55,8 @@ a1b1, a2b2
 
 ### Counting the number of arguments
 
-- `MPT_ARGS_COUNT( <arguments> )`
+- `ArgsCount.h`
+    - `MPT_ARGS_COUNT( <arguments> )`
 ```c
 //Count lists items, up to 100 items
 MPT_ARGS_COUNT( a1, a2, a3, a4 )
@@ -62,10 +67,11 @@ MPT_ARGS_COUNT( a1, a2, a3, a4 )
 ```
 
 ### Generate a list that counts up to the number
-- `MPT_COUNT_TO(number, prefix, suffix)`
-- `MPT_COUNT_TO_MINUS_1(number, prefix, suffix)`
-- `MPT_COUNT_TO_<Number>_(prefix, suffix)`
-- `MPT_COUNT_TO_<Number>_MINUS_1(prefix, suffix)`
+- `CountTo.h`
+    - `MPT_COUNT_TO(number, prefix, suffix)`
+    - `MPT_COUNT_TO_MINUS_1(number, prefix, suffix)`
+    - `MPT_COUNT_TO_<Number>_(prefix, suffix)`
+    - `MPT_COUNT_TO_<Number>_MINUS_1(prefix, suffix)`
 ```c
 MPT_COUNT_TO( 5, /* no prefix */, _suffix )
 MPT_COUNT_TO_MINUS_1( 4, prefix_, /* no suffix */ )
@@ -83,8 +89,9 @@ _1_, _2_
 ```
 
 ### Repeat the arguments with delimiter
-- `MPT_REPEAT(number, delimiter, <arguments>)`
-- `MPT_REPEAT_WITH_COMMA(number, <arguments>)`
+- `CountTo.h`
+    - `MPT_REPEAT(number, delimiter, <arguments>)`
+    - `MPT_REPEAT_WITH_COMMA(number, <arguments>)`
 ```c
 MPT_REPEAT(3, , int)
 MPT_REPEAT(2, |, 1, 2)
@@ -102,8 +109,8 @@ a, b, a, b
 ```
 
 ### Get the last argument
-
-- `MPT_GET_LAST_ARG( <arguments> )`
+- `GetLastArg.h`
+    - `MPT_GET_LAST_ARG( <arguments> )`
 ```c
 //Get the last argument in the list
 MPT_GET_LAST_ARG( a1, a2, a3, a4 )
@@ -114,8 +121,8 @@ a4
 ```
 
 ### Check if arguments are empty or not
-
-- `MPT_ARE_ARGS_EMPTY( <arguments> )`
+- `AreArgsEmpty.h`
+    - `MPT_ARE_ARGS_EMPTY( <arguments> )`
 ```c
 
 //Check if the list is empty
@@ -132,10 +139,11 @@ NOT_EMPTY
 ```
 
 ### Remove parenthesis
-- `MPT_REMOVE_PARENTHESIS( argument )`
-    - This removes any outer parenthesis for `argument` if there's any
-- `MPT_REMOVE_PARENTHESIS_IN_LIST( <arguments> )`
-    - Same as `MPT_REMOVE_PARENTHESIS` but does it for each item in the list
+- `RemoveParenthesisInList.h`
+    - `MPT_REMOVE_PARENTHESIS( argument )`
+        - This removes any outer parenthesis for `argument` if there's any
+    - `MPT_REMOVE_PARENTHESIS_IN_LIST( <arguments> )`
+        - Same as `MPT_REMOVE_PARENTHESIS` but does it for each item in the list
 
 ```c
 MPT_REMOVE_PARENTHESIS( (ITEM_1) )
@@ -154,18 +162,19 @@ ITEM_1, ITEM_1, ITEM_2, ITEM_2
 ```
 
 ### Miscellaneous Macros (Concatenating, Composing)
-- `MPT_CONCAT( a, b )`
-    - This has 20 copies for nested calling
-    > `MPT_CONCAT2( a, b )`, `MPT_CONCAT3( a, b )`, etc...
-    - This also has a delayed version for ability to not expand immediately
-    > `MPT_DELAYED_CONCAT( a, b )`, `MPT_DELAYED_CONCAT2( a, b )`, etc...
-- `MPT_COMPOSE( a, b )`
-    - This has 20 copies for nested calling
-    > `MPT_COMPOSE2( a, b )`, `MPT_COMPOSE3( a, b )`, etc...
-    - This also has a delayed version for ability to not expand immediately
-    > `MPT_DELAYED_COMPOSE( a, b )`, `MPT_DELAYED_COMPOSE2( a, b )`, etc...
-- `MPT_DELAY(...)` 
-    - Delays the expansion of the arguments
+- `Miscellaneous.h`
+    - `MPT_CONCAT( a, b )`
+        - This has 20 copies for nested calling
+        > `MPT_CONCAT2( a, b )`, `MPT_CONCAT3( a, b )`, etc...
+        - This also has a delayed version for ability to not expand immediately
+        > `MPT_DELAYED_CONCAT( a, b )`, `MPT_DELAYED_CONCAT2( a, b )`, etc...
+    - `MPT_COMPOSE( a, b )`
+        - This has 20 copies for nested calling
+        > `MPT_COMPOSE2( a, b )`, `MPT_COMPOSE3( a, b )`, etc...
+        - This also has a delayed version for ability to not expand immediately
+        > `MPT_DELAYED_COMPOSE( a, b )`, `MPT_DELAYED_COMPOSE2( a, b )`, etc...
+    - `MPT_DELAY(...)`
+        - Delays the expansion of the arguments
 ```c
 
 MPT_CONCAT( ITEM_1, ITEM_2 )
@@ -181,7 +190,8 @@ ITEM_1, ITEM_2
 
 ### Macro Function Overloading
 
-- `MPT_OVERLOAD_MACRO( macroName, <arguments> )`
+- `Overload.h`
+    - `MPT_OVERLOAD_MACRO( macroName, <arguments> )`
 
 ```c
 #define MACRO_FUNC_0() 0
@@ -204,8 +214,10 @@ MACRO_FUNC(1, 2)
 
 ### Prefixing, Suffixing, Prepending or Appending to all arguments
 
-- `MPT_PREFIX_SUFFIX_ARGS( prefix, suffix, <arguments> )`
-- `MPT_PREPEND_APPEND_ARGS( prepend, append, <arguments> )`
+- `PrefixSuffixArgs.h`
+    - `MPT_PREFIX_SUFFIX_ARGS( prefix, suffix, <arguments> )`
+- `PrependAppendArgs.h`
+    - `MPT_PREPEND_APPEND_ARGS( prepend, append, <arguments> )`
 
 ```c
 MPT_PREFIX_SUFFIX_ARGS( /* no prefix*/, _suffix, a1, a2, a3 )
@@ -219,9 +231,10 @@ const int, const char, const char*
 
 ### Persistent Counter
 
-- `MPT_START_COUNTER_AND_INCREMENT(name, [optional note])`
-- `MPT_INCREMENT_COUNTER([optional note])`
-- `MPT_GET_COUNT_AND_INCREMENT(name, [optional note])`
+- `PersistentCounter.h`
+    - `MPT_START_COUNTER_AND_INCREMENT(name, [optional note])`
+    - `MPT_INCREMENT_COUNTER([optional note])`
+    - `MPT_GET_COUNT_AND_INCREMENT(name, [optional note])`
 
 ```c
 
@@ -254,10 +267,10 @@ enum { INTERNAL_MPT5 = 5 };
 
 ### \_\_VA_OPT\_\_ equivalent
 
-- `MPT_ARGS_OPT( (args), (nonEmptyExpand) )`
+- `ArgsOpt.h`
+    - `MPT_ARGS_OPT( (<arguments>), (nonEmptyExpand) )`
 
 ```c
-
 MPT_ARGS_OPT( (a), (a) ) 123
 MPT_ARGS_OPT( (a,b), (a,b) ) 123
 MPT_ARGS_OPT( (a,b), (,) ) 123
@@ -272,3 +285,16 @@ a,b 123
 
 123
 ```
+
+### Split list with delimiter
+- `SplitList.h`
+    - `MPT_SPLIT_LIST( delimiter, <arguments> )`
+
+```c
+MPT_SPLIT_LIST( ;, int a, char b, float c );
+
+//Expands to...
+
+int a; char b; float c;
+```
+
