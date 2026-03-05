@@ -91,7 +91,7 @@ R"(
             40, 39, 38, 37, 36, 35, 34, 33, 32, 31, \
             30, 29, 28, 27, 26, 25, 24, 23, 22, 21, \
             20, 19, 18, 17, 16, 15, 14, 13, 12, 11, \
-            10, 9, 8, 7, 6, 5, 4, 3, 2, 1 \
+            10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1 \
         ) \
     )
 
@@ -159,14 +159,15 @@ R"(
             NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
             NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
             NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
-            NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, \
+            NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY, NOT_EMPTY \
         ) \
     )
 
 #define INTERNAL_MPT_PAA_PREPEND_COMMA_EMPTY(...)
+
 #define INTERNAL_MPT_PAA_PREPEND_COMMA_NOT_EMPTY(...) ,
 
-#define MPT_PREPEND_APPEND_ARGS( prepend, append, ... ) \
+#define MPT_PREPEND_APPEND_ARGS( ... ) \
     INTERNAL_MPT_PAA_DELAYED_COMPOSE \
     ( \
         INTERNAL_MPT_PAA_COMPOSE2 \
@@ -177,34 +178,27 @@ R"(
                 ( INTERNAL_MPT_PREPEND_APPEND_ARGS, INTERNAL_MPT_PAA_ARGS_COUNT( __VA_ARGS__ ) ) \
             ) \
         ), \
-        ( \
-            prepend, \
-            append \
-            INTERNAL_MPT_PAA_COMPOSE4 \
-            ( \
-                INTERNAL_MPT_PAA_DELAYED_CONCAT2 \
-                ( \
-                    INTERNAL_MPT_PAA_PREPEND_COMMA_, INTERNAL_MPT_PAA_ARE_ARGS_EMPTY( __VA_ARGS__ ) \
-                ), \
-                (__VA_ARGS__) \
-            ) __VA_ARGS__ \
-        ) \
+        ( __VA_ARGS__ ) \
     )
 
-#define INTERNAL_MPT_PREPEND_APPEND_ARGS_0( pre, app )
 
-#define INTERNAL_MPT_PREPEND_APPEND_ARGS_1( pre, app, _1 ) \
-pre _1 app
+#define INTERNAL_MPT_PREPEND_APPEND_ARGS_0()
+
+#define INTERNAL_MPT_PREPEND_APPEND_ARGS_1( _1 )
+
+#define INTERNAL_MPT_PREPEND_APPEND_ARGS_2( pre, app )
+
+#define INTERNAL_MPT_PREPEND_APPEND_ARGS_3( pre, app, _1 ) pre _1 app
 
 )";
     
-    for(int i = 2; i < 100; ++i)
+    for(int i = 4; i < 100; ++i)
     {
         content += "#define INTERNAL_MPT_PREPEND_APPEND_ARGS_" + std::to_string(i) + "( pre, app, ";
         
-        for(int j = 1; j <= i; ++j)
+        for(int j = 3; j <= i; ++j)
         {
-            content += "_" + std::to_string(j);
+            content += "_" + std::to_string(j - 2);
             
             if(j != i)
                 content += ", ";
@@ -215,15 +209,15 @@ pre _1 app
         content +=  "INTERNAL_MPT_PREPEND_APPEND_ARGS_" + std::to_string(i - 1) + 
                     "(pre, app, ";
 
-        for(int j = 1; j < i; ++j)
+        for(int j = 3; j < i; ++j)
         {
-            content += "_" + std::to_string(j);
+            content += "_" + std::to_string(j - 2);
             
             if(j != i - 1)
                 content += ", ";
         }
 
-        content += "), pre _" + std::to_string(i) + " app\n\n";
+        content += "), pre _" + std::to_string(i - 2) + " app\n\n";
     }
 
     content += "\n#endif\n";

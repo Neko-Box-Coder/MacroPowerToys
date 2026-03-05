@@ -28,7 +28,7 @@ void TEST__MPT_PREPEND_APPEND_ARGS  (
 }
 
                                         //Expands to: ``
-void TEST__MPT_PREPEND_APPEND_ARGS__EMPTY(MPT_PREPEND_APPEND_ARGS(a, b, ) void)
+void TEST__MPT_PREPEND_APPEND_ARGS__EMPTY(MPT_PREPEND_APPEND_ARGS(a, b) void)
 {
     
 }
