@@ -25,7 +25,7 @@ else()
                                     "-Wno-unused-variable"
                                     "-Wno-unused-parameter"
                                     "-Wno-switch"
-                                    "-Wno-gnu-zero-variadic-macro-arguments"
+                                    # "-Wno-gnu-zero-variadic-macro-arguments"
                                     "-Wextra"
                                     "-pedantic"
                                     "-Werror")
@@ -52,6 +52,7 @@ if(MACRO_POWER_TOYS_BUILD_TEST)
         add_executable(${exampleName}Cpp "${examplePath}")
         set_target_properties(  ${exampleName}Cpp PROPERTIES 
                                 CXX_STANDARD 11
+                                CXX_EXTENSIONS OFF
                                 CXX_STANDARD_REQUIRED ON)
         target_link_libraries(${exampleName}Cpp PUBLIC MacroPowerToys)
         target_compile_options(${exampleName}Cpp PUBLIC "${MPT_STANDARD_COMPILE_FLAGS}")

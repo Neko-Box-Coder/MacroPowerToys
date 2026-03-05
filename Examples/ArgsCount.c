@@ -16,7 +16,7 @@ int TEST__MPT_ARGS_COUNT__EMPTY(void)
     return MPT_ARGS_COUNT();
 }
 
-int TEST__MPT_ARGS_COUNT_PAREN_FIRST_ARG()
+int TEST__MPT_ARGS_COUNT_PAREN_FIRST_ARG(void)
 {
             //Expands to: `1`                       Expands to: `2`
     return MPT_ARGS_COUNT((std::tuple<int, int>)) + MPT_ARGS_COUNT((std::tuple<int, int>), int);
